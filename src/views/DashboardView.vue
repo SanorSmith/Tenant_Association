@@ -140,6 +140,70 @@
           </div>
         </BaseCard>
       </div>
+
+      <!-- Pending Bookings Section -->
+      <div v-if="bookingsStore.pendingBookings.length > 0" class="mt-8">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-accent">⏳ Väntande bokningar</h2>
+          <BaseButton variant="outline" size="sm" @click="router.push('/bookings')">
+            Visa alla →
+          </BaseButton>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <BaseCard
+            v-for="booking in bookingsStore.pendingBookings.slice(0, 6)"
+            :key="booking.id"
+            padding="md"
+            hover
+          >
+            <div class="mb-4">
+              <div class="flex justify-between items-start mb-3">
+                <h3 class="text-lg font-semibold text-navy">{{ booking.premiseName }}</h3>
+                <BaseBadge variant="warning" size="sm">Väntande</BaseBadge>
+              </div>
+              
+              <div class="space-y-2 text-sm">
+                <p class="flex items-center gap-2 text-textGray">
+                  <span>👤</span>
+                  <span>{{ booking.name }}</span>
+                </p>
+                <p class="flex items-center gap-2 text-textGray">
+                  <span>📅</span>
+                  <span>{{ formatDate(booking.date) }}</span>
+                </p>
+                <p class="flex items-center gap-2 text-textGray">
+                  <span>🕐</span>
+                  <span>{{ booking.startTime }} - {{ booking.endTime }}</span>
+                </p>
+                <p class="flex items-center gap-2 text-textGray">
+                  <span>📝</span>
+                  <span class="truncate">{{ booking.purpose }}</span>
+                </p>
+              </div>
+            </div>
+            
+            <div class="flex gap-2 pt-3 border-t border-gray-200">
+              <BaseButton
+                variant="primary"
+                size="sm"
+                full-width
+                @click="handleConfirmBooking(booking.id)"
+              >
+                ✓ Godkänn
+              </BaseButton>
+              <BaseButton
+                variant="secondary"
+                size="sm"
+                full-width
+                @click="handleRejectBooking(booking.id)"
+              >
+                ✕ Avslå
+              </BaseButton>
+            </div>
+          </BaseCard>
+        </div>
+      </div>
     </div>
   </DefaultLayout>
 </template>
@@ -148,6 +212,7 @@
 import { h } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
+import { useBookingsStore } from '@/stores/bookings'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -155,6 +220,7 @@ import BaseBadge from '@/components/BaseBadge.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const bookingsStore = useBookingsStore()
 
 const UsersIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' }, [
   h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z' })
@@ -176,11 +242,15 @@ const PlusIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewBox:
   h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M12 4v16m8-8H4' })
 ])
 
+const BookingIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewBox: '0 0 24 24' }, [
+  h('path', { 'stroke-linecap': 'round', 'stroke-linejoin': 'round', 'stroke-width': '2', d: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z' })
+])
+
 const stats = [
   { label: 'Totalt medlemmar', value: '112', change: '+5 denna månad', changeClass: 'text-green-600', icon: UsersIcon, iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
   { label: 'Kommande möten', value: '3', change: '2 denna vecka', changeClass: 'text-primary', icon: CalendarIcon, iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
   { label: 'Nya dokument', value: '8', change: '+3 denna vecka', changeClass: 'text-green-600', icon: DocumentIcon, iconBg: 'bg-green-100', iconColor: 'text-green-600' },
-  { label: 'Aktiva aktiviteter', value: '5', change: '2 pågående', changeClass: 'text-orange-600', icon: ActivityIcon, iconBg: 'bg-orange-100', iconColor: 'text-orange-600' }
+  { label: 'Väntande bokningar', value: bookingsStore.pendingBookings.length.toString(), change: bookingsStore.pendingBookings.length > 0 ? 'Behöver granskas' : 'Inga väntande', changeClass: bookingsStore.pendingBookings.length > 0 ? 'text-orange-600' : 'text-green-600', icon: BookingIcon, iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' }
 ]
 
 const recentActivities = [
@@ -212,5 +282,46 @@ const recentDocuments = [
 
 const handleAction = (route: string) => {
   router.push(route)
+}
+
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr)
+  return date.toLocaleDateString('sv-SE', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+const handleConfirmBooking = async (id: string) => {
+  const currentUser = authStore.user
+  const result = await bookingsStore.confirmBooking(
+    id,
+    currentUser?.name || 'Admin',
+    'Godkänd från dashboard'
+  )
+  
+  if (result.success) {
+    alert('Bokning godkänd! ✓')
+  } else {
+    alert('Kunde inte godkänna bokningen')
+  }
+}
+
+const handleRejectBooking = async (id: string) => {
+  const currentUser = authStore.user
+  const reason = prompt('Anledning till avslag (valfritt):')
+  
+  const result = await bookingsStore.rejectBooking(
+    id,
+    currentUser?.name || 'Admin',
+    reason || 'Avslagen från dashboard'
+  )
+  
+  if (result.success) {
+    alert('Bokning avslagen')
+  } else {
+    alert('Kunde inte avslå bokningen')
+  }
 }
 </script>
