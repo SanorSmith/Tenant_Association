@@ -15,7 +15,7 @@
         </h1>
         
         <p class="text-lg text-textGray mb-2">
-          📍 {{ association.address }}
+          📍 {{ association.address }}, {{ association.city }}
         </p>
         
         <p class="text-navy mb-6">
@@ -24,10 +24,10 @@
         
         <div class="flex gap-8 text-sm text-textGray">
           <div>
-            <strong class="text-navy">{{ association.apartments }}</strong> lägenheter
+            <strong class="text-navy">{{ association.totalApartments }}</strong> lägenheter
           </div>
           <div>
-            <strong class="text-navy">{{ association.members }}</strong> medlemmar
+            <strong class="text-navy">{{ association.totalMembers }}</strong> medlemmar
           </div>
         </div>
       </div>
