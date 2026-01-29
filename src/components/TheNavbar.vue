@@ -1,11 +1,11 @@
 <template>
-  <nav class="navbar bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+  <nav class="navbar bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm lg:hidden">
     <div class="container-custom">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-4">
           <button
             @click="toggleSidebar"
-            class="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
             aria-label="Toggle menu"
           >
             <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -21,16 +21,7 @@
           </RouterLink>
         </div>
 
-        <div class="hidden lg:flex items-center gap-6">
-          <RouterLink
-            v-for="item in navItems"
-            :key="item.name"
-            :to="{ name: item.name }"
-            class="nav-link"
-          >
-            {{ item.label }}
-          </RouterLink>
-        </div>
+        <!-- Desktop navigation hidden when sidebar is present -->
 
         <div class="flex items-center gap-3">
           <button
@@ -86,7 +77,7 @@
     </div>
 
     <Transition name="mobile-menu">
-      <div v-if="showMobileMenu" class="lg:hidden border-t border-gray-200 bg-white">
+      <div v-if="showMobileMenu" class="border-t border-gray-200 bg-white">
         <div class="container-custom py-4 space-y-2">
           <RouterLink
             v-for="item in navItems"
