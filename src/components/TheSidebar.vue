@@ -28,8 +28,8 @@
         <div class="space-y-1">
           <RouterLink
             v-for="item in menuItems"
-            :key="item.path"
-            :to="item.path"
+            :key="item.name"
+            :to="{ name: item.name }"
             class="sidebar-link"
             :title="collapsed ? item.label : ''"
           >
@@ -115,13 +115,13 @@ const BookingsIcon = () => h('svg', { class: 'w-5 h-5', fill: 'none', stroke: 'c
 ])
 
 const menuItems = [
-  { label: 'Dashboard', path: '/dashboard', icon: DashboardIcon },
-  { label: 'Möten', path: '/meetings', icon: MeetingsIcon, badge: 3 },
-  { label: 'Dokument', path: '/documents', icon: DocumentsIcon },
-  { label: 'Budget', path: '/budget', icon: BudgetIcon },
-  { label: 'Aktiviteter', path: '/activities', icon: ActivitiesIcon },
-  { label: 'Lokaler', path: '/premises', icon: PremisesIcon },
-  { label: 'Bokningar', path: '/bookings', icon: BookingsIcon, badge: 2 }
+  { label: 'Dashboard', name: 'dashboard', icon: DashboardIcon },
+  { label: 'Möten', name: 'meetings', icon: MeetingsIcon, badge: 3 },
+  { label: 'Dokument', name: 'documents', icon: DocumentsIcon },
+  { label: 'Budget', name: 'budget', icon: BudgetIcon },
+  { label: 'Aktiviteter', name: 'activities', icon: ActivitiesIcon },
+  { label: 'Lokaler', name: 'premises', icon: PremisesIcon },
+  { label: 'Bokningar', name: 'bookings', icon: BookingsIcon, badge: 2 }
 ]
 </script>
 

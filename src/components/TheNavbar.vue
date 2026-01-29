@@ -24,8 +24,8 @@
         <div class="hidden lg:flex items-center gap-6">
           <RouterLink
             v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
+            :key="item.name"
+            :to="{ name: item.name }"
             class="nav-link"
           >
             {{ item.label }}
@@ -90,8 +90,8 @@
         <div class="container-custom py-4 space-y-2">
           <RouterLink
             v-for="item in navItems"
-            :key="item.path"
-            :to="item.path"
+            :key="item.name"
+            :to="{ name: item.name }"
             class="mobile-nav-link"
             @click="showMobileMenu = false"
           >
@@ -115,13 +115,13 @@ const showMobileMenu = ref(false)
 const showUserMenu = ref(false)
 
 const navItems = [
-  { label: 'Dashboard', path: '/dashboard' },
-  { label: 'Möten', path: '/meetings' },
-  { label: 'Dokument', path: '/documents' },
-  { label: 'Budget', path: '/budget' },
-  { label: 'Aktiviteter', path: '/activities' },
-  { label: 'Lokaler', path: '/premises' },
-  { label: 'Bokningar', path: '/bookings' }
+  { label: 'Dashboard', name: 'dashboard' },
+  { label: 'Möten', name: 'meetings' },
+  { label: 'Dokument', name: 'documents' },
+  { label: 'Budget', name: 'budget' },
+  { label: 'Aktiviteter', name: 'activities' },
+  { label: 'Lokaler', name: 'premises' },
+  { label: 'Bokningar', name: 'bookings' }
 ]
 
 const toggleSidebar = () => {
