@@ -31,7 +31,7 @@
       <BaseInput
         v-model="form.date"
         label="Datum"
-        placeholder="YYYY-MM-DD"
+        type="date"
         required
         :error="errors.date"
       />
@@ -40,7 +40,7 @@
         <BaseInput
           v-model="form.startTime"
           label="Starttid"
-          placeholder="HH:MM"
+          type="time"
           required
           :error="errors.startTime"
         />
@@ -48,7 +48,7 @@
         <BaseInput
           v-model="form.endTime"
           label="Sluttid"
-          placeholder="HH:MM"
+          type="time"
           required
           :error="errors.endTime"
         />

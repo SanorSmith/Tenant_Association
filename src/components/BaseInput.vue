@@ -52,7 +52,7 @@ import { computed, ref } from 'vue'
 interface Props {
   modelValue: string | number
   label?: string
-  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search' | 'textarea'
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search' | 'textarea' | 'date' | 'time'
   placeholder?: string
   disabled?: boolean
   required?: boolean
