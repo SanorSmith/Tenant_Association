@@ -56,23 +56,9 @@ export const useAuthStore = defineStore('auth', () => {
   const login = (email: string, password: string): boolean => {
     console.log('Login attempt:', { email, password })
     
-    // Demo credentials - exact match required
-    const demoCredentials = [
-      { email: 'anna@solhojden.se', password: 'solhojden123' },
-      { email: 'erik@parkgatan.se', password: 'parkgatan123' },
-      { email: 'maria@sjoutsikten.se', password: 'sjoutsikten123' },
-      { email: 'johan@centrumhuset.se', password: 'centrumhuset123' },
-      { email: 'demo@example.com', password: 'demo123' } // Generic demo
-    ]
-
-    const validCredential = demoCredentials.find(cred => 
-      cred.email === email && cred.password === password
-    )
-
-    console.log('Valid credential found:', validCredential)
-
-    if (validCredential) {
-      const loggedInUser = demoUsers.find(u => u.email === email) || demoUsers[0]
+    // Demo mode - accept any email and password
+    if (email && password) {
+      const loggedInUser = demoUsers[0] // Always login as admin user for demo
       user.value = loggedInUser
       isAuthenticated.value = true
       localStorage.setItem('grannskapet_auth', 'true')
@@ -81,7 +67,7 @@ export const useAuthStore = defineStore('auth', () => {
       return true
     }
 
-    console.log('Login failed - invalid credentials')
+    console.log('Login failed - missing credentials')
     return false
   }
 

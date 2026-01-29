@@ -63,29 +63,11 @@
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <p class="text-sm font-medium text-blue-900 mb-2">Demo-inloggning</p>
               <p class="text-xs text-blue-700 mb-3">
-                Välj en av följande demo-konton för att logga in:
+                Detta är en demo-version. Ange valfri e-postadress och lösenord för att logga in.
               </p>
-              <div class="space-y-2 text-xs">
-                <div class="border-b border-blue-100 pb-2">
-                  <p class="font-medium text-blue-800">🏛️ Styrelsemedlem (Admin)</p>
-                  <p><strong>E-post:</strong> anna@solhojden.se</p>
-                  <p><strong>Lösenord:</strong> solhojden123</p>
-                </div>
-                <div class="border-b border-blue-100 pb-2">
-                  <p class="font-medium text-blue-800">👥 Styrelsemedlem</p>
-                  <p><strong>E-post:</strong> erik@parkgatan.se</p>
-                  <p><strong>Lösenord:</strong> parkgatan123</p>
-                </div>
-                <div class="border-b border-blue-100 pb-2">
-                  <p class="font-medium text-blue-800">👥 Styrelsemedlem</p>
-                  <p><strong>E-post:</strong> maria@sjoutsikten.se</p>
-                  <p><strong>Lösenord:</strong> sjoutsikten123</p>
-                </div>
-                <div>
-                  <p class="font-medium text-blue-800">👤 Vanlig medlem</p>
-                  <p><strong>E-post:</strong> johan@centrumhuset.se</p>
-                  <p><strong>Lösenord:</strong> centrumhuset123</p>
-                </div>
+              <div class="space-y-1 text-xs text-blue-600">
+                <p><strong>E-post:</strong> valfri@email.se</p>
+                <p><strong>Lösenord:</strong> valfritt123</p>
               </div>
               
               <button 
