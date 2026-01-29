@@ -22,7 +22,7 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: () => import('@/views/DashboardView.vue'),
+    component: () => import('@/views/admin/AdminDashboardView.vue'),
     meta: { requiresAuth: true }
   },
   {
