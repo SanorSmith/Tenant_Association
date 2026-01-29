@@ -184,7 +184,7 @@ const stats = [
 ]
 
 const recentActivities = [
-  { id: 1, title: 'Nytt möte skapat', description: 'Årsstämma 2024 har schemalagts', time: 'För 2 timmar sedan', badge: 'Möte', badgeVariant: 'primary', icon: CalendarIcon, iconBg: 'bg-primary-100', iconColor: 'text-primary' },
+  { id: 1, title: 'Nytt möte skapat', description: 'Årsstämma 2024 har schemalagts', time: 'För 2 timmar sedan', badge: 'Möte', badgeVariant: 'info', icon: CalendarIcon, iconBg: 'bg-primary-100', iconColor: 'text-primary' },
   { id: 2, title: 'Dokument uppladdat', description: 'Årsredovisning 2023.pdf', time: 'För 5 timmar sedan', badge: 'Dokument', badgeVariant: 'info', icon: DocumentIcon, iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
   { id: 3, title: 'Ny aktivitet', description: 'Grillkväll i augusti', time: 'Igår', badge: 'Aktivitet', badgeVariant: 'success', icon: ActivityIcon, iconBg: 'bg-green-100', iconColor: 'text-green-600' },
   { id: 4, title: 'Bokning bekräftad', description: 'Festlokal - 15 juni', time: 'För 2 dagar sedan', badge: 'Bokning', badgeVariant: 'warning', icon: CalendarIcon, iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' }
