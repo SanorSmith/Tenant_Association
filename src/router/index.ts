@@ -17,7 +17,10 @@ const routes = [
     path: '/association/:id',
     name: 'association-detail',
     component: () => import('@/views/public/AssociationDetailView.vue'),
-    meta: { public: true }
+    meta: { 
+      requiresAuth: false,
+      title: 'Föreningsdetaljer'
+    }
   },
   {
     path: '/dashboard',
