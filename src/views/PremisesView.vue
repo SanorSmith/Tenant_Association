@@ -17,19 +17,29 @@
             <div class="flex flex-wrap gap-2 mb-3">
               <BaseBadge v-for="amenity in premise.amenities" :key="amenity" variant="info" size="sm">{{ amenity }}</BaseBadge>
             </div>
-            <BaseButton variant="primary" size="sm">Boka nu</BaseButton>
+            <BaseButton variant="primary" size="sm" @click="openBookingModal(premise)">Boka nu</BaseButton>
           </div>
         </div>
       </BaseCard>
     </div>
+
+    <!-- Booking Modal -->
+    <BookingModal
+      v-model="isBookingModalOpen"
+      :premise-id="selectedPremise?.id.toString() || ''"
+      :premise-name="selectedPremise?.name || ''"
+      @submitted="handleBookingSubmitted"
+    />
   </DefaultLayout>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseBadge from '@/components/BaseBadge.vue'
+import BookingModal from '@/components/modals/BookingModal.vue'
 
 const premises = [
   { id: 1, name: 'Festlokal', icon: '🎉', description: 'Stor lokal för fester och evenemang', amenities: ['Kök', 'Ljudsystem', '50 personer'] },
@@ -37,4 +47,18 @@ const premises = [
   { id: 3, name: 'Gym', icon: '💪', description: 'Välutrustat träningsutrymme', amenities: ['Löpband', 'Vikter', 'Yoga'] },
   { id: 4, name: 'Gästlägenhet', icon: '🏠', description: 'Lägenhet för besökande gäster', amenities: ['2 rum', 'Kök', 'Badrum'] }
 ]
+
+const isBookingModalOpen = ref(false)
+const selectedPremise = ref<typeof premises[0] | null>(null)
+
+const openBookingModal = (premise: typeof premises[0]) => {
+  selectedPremise.value = premise
+  isBookingModalOpen.value = true
+}
+
+const handleBookingSubmitted = () => {
+  isBookingModalOpen.value = false
+  selectedPremise.value = null
+  alert('Bokning skickad! Vi återkommer inom kort.')
+}
 </script>
