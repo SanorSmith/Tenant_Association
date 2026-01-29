@@ -94,15 +94,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useRouter, useRoute } from 'vue-router'
+import { useAuth } from '@/composables/useAuth'
 import PublicLayout from '@/layouts/PublicLayout.vue'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
 const router = useRouter()
-const authStore = useAuthStore()
+const route = useRoute()
+const { login } = useAuth()
 
 const email = ref('')
 const password = ref('')
@@ -130,20 +131,27 @@ const handleLogin = async () => {
   loading.value = true
 
   setTimeout(() => {
-    const success = authStore.login(email.value, password.value)
-    
-    if (success) {
-      router.push('/dashboard')
-    } else {
-      errors.value.general = 'Inloggningen misslyckades. Försök igen.'
+    // Demo login - accept any email and password
+    const userData = {
+      id: '1',
+      name: email.value.split('@')[0],
+      email: email.value,
+      role: 'admin'
     }
+    
+    login(userData)
+    
+    // Redirect to intended page or dashboard
+    const redirectPath = route.query.redirect as string || '/dashboard'
+    router.push(redirectPath)
     
     loading.value = false
   }, 1000)
 }
 
 const clearAuthState = () => {
-  authStore.clearAuth()
+  const { logout } = useAuth()
+  logout()
   email.value = ''
   password.value = ''
   errors.value = { email: '', password: '', general: '' }

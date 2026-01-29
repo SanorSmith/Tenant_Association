@@ -54,14 +54,12 @@
         </button>
         <div v-else class="space-y-3">
           <div class="flex items-center gap-3 p-3 bg-primary-50 rounded-lg">
-            <img
-              :src="authStore.user?.avatar"
-              :alt="authStore.user?.name"
-              class="w-10 h-10 rounded-full object-cover"
-            />
+            <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+              <span class="text-white font-bold text-lg">{{ user?.name?.charAt(0).toUpperCase() || 'U' }}</span>
+            </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-navy truncate">{{ authStore.user?.name }}</p>
-              <p class="text-xs text-textGray truncate">{{ authStore.user?.apartment }}</p>
+              <p class="text-sm font-medium text-navy truncate">{{ user?.name }}</p>
+              <p class="text-xs text-textGray truncate">{{ user?.role || 'Admin' }}</p>
             </div>
           </div>
           
@@ -96,11 +94,11 @@
 <script setup lang="ts">
 import { ref, computed, h } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuth } from '@/composables/useAuth'
 import BaseBadge from './BaseBadge.vue'
 
 const router = useRouter()
-const authStore = useAuthStore()
+const { user, logout } = useAuth()
 const collapsed = ref(false)
 
 const sidebarClasses = computed(() => {
@@ -115,8 +113,7 @@ const toggleCollapse = () => {
 
 const handleLogout = () => {
   if (confirm('Är du säker på att du vill logga ut?')) {
-    authStore.logout()
-    router.push('/login')
+    logout()
   }
 }
 

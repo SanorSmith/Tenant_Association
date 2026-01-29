@@ -10,9 +10,9 @@
         </RouterLink>
 
         <div class="hidden md:flex items-center gap-8">
-          <a href="#features" class="nav-link">Funktioner</a>
-          <a href="#about" class="nav-link">Om oss</a>
-          <a href="#contact" class="nav-link">Kontakt</a>
+          <a href="/#features" class="nav-link" @click="navigateToSection('features')">Funktioner</a>
+          <a href="/#about" class="nav-link" @click="navigateToSection('about')">Om oss</a>
+          <a href="/#contact" class="nav-link" @click="navigateToSection('contact')">Kontakt</a>
         </div>
 
         <div class="flex items-center gap-3">
@@ -35,9 +35,9 @@
     <Transition name="mobile-menu">
       <div v-if="showMobileMenu" class="md:hidden border-t border-gray-200 bg-white">
         <div class="container-custom py-4 space-y-2">
-          <a href="#features" class="mobile-nav-link" @click="showMobileMenu = false">Funktioner</a>
-          <a href="#about" class="mobile-nav-link" @click="showMobileMenu = false">Om oss</a>
-          <a href="#contact" class="mobile-nav-link" @click="showMobileMenu = false">Kontakt</a>
+          <a href="/#features" class="mobile-nav-link" @click="navigateToSectionMobile('features')">Funktioner</a>
+          <a href="/#about" class="mobile-nav-link" @click="navigateToSectionMobile('about')">Om oss</a>
+          <a href="/#contact" class="mobile-nav-link" @click="navigateToSectionMobile('contact')">Kontakt</a>
           <BaseButton variant="outline" size="md" class="w-full" @click="goToLoginMobile">
               Logga in
             </BaseButton>
@@ -66,6 +66,24 @@ const goToLogin = () => {
 const goToLoginMobile = () => {
   showMobileMenu.value = false
   router.push('/login')
+}
+
+const navigateToSection = (sectionId: string) => {
+  // If we're already on the landing page, just scroll to the section
+  if (router.currentRoute.value.path === '/') {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  } else {
+    // Navigate to landing page with hash
+    router.push(`/#${sectionId}`)
+  }
+}
+
+const navigateToSectionMobile = (sectionId: string) => {
+  showMobileMenu.value = false
+  navigateToSection(sectionId)
 }
 </script>
 

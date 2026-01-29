@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuth } from '@/composables/useAuth'
 
 const routes = [
   {
@@ -68,6 +69,48 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/hjalpcenter',
+    name: 'help-center',
+    component: () => import('@/views/HelpCenterView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/kontakt',
+    name: 'contact',
+    component: () => import('@/views/ContactView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/faq',
+    name: 'faq',
+    component: () => import('@/views/FAQView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/anvandarguide',
+    name: 'user-guide',
+    component: () => import('@/views/UserGuideView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/integritetspolicy',
+    name: 'privacy-policy',
+    component: () => import('@/views/PrivacyPolicyView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/anvandarvillkor',
+    name: 'terms',
+    component: () => import('@/views/TermsView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/cookies',
+    name: 'cookies',
+    component: () => import('@/views/CookiesView.vue'),
+    meta: { public: true }
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/views/NotFoundView.vue')
@@ -80,13 +123,23 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('grannskapet_auth') === 'true'
+  const { isAuthenticated, initAuth } = useAuth()
   
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next({ name: 'login', query: { redirect: to.fullPath } })
-  } else if (to.name === 'login' && isAuthenticated) {
-    // Temporarily disabled for testing - allow access to login page even if authenticated
+  // Initialize auth state
+  initAuth()
+  
+  // Allow public pages to pass through
+  if (to.meta.public) {
     next()
+    return
+  }
+  
+  // Check if authentication is required
+  if (to.meta.requiresAuth && !isAuthenticated.value) {
+    next({ name: 'login', query: { redirect: to.fullPath } })
+  } else if (to.name === 'login' && isAuthenticated.value) {
+    // Redirect to dashboard if already authenticated
+    next({ name: 'dashboard' })
   } else {
     next()
   }

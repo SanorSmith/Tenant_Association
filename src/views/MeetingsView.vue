@@ -35,61 +35,67 @@
 
     <!-- Create Meeting Modal -->
     <BaseModal v-model="showCreateModal" title="Skapa nytt möte" size="md">
-      <form @submit.prevent="handleCreateMeeting">
-        <div class="space-y-4">
+      <div class="space-y-4">
+        <BaseInput
+          v-model="form.title"
+          label="Mötets titel"
+          placeholder="Ange titel för mötet"
+          :error="errors.title"
+          required
+        />
+        
+        <BaseInput
+          v-model="form.description"
+          label="Beskrivning"
+          placeholder="Beskriv mötets ämne och agenda"
+          type="textarea"
+          :error="errors.description"
+          required
+        />
+        
+        <div class="grid grid-cols-2 gap-4">
           <BaseInput
-            v-model="form.title"
-            label="Mötets titel"
-            placeholder="Ange titel för mötet"
-            :error="errors.title"
+            v-model="form.date"
+            label="Datum"
+            type="date"
+            :error="errors.date"
             required
           />
           
           <BaseInput
-            v-model="form.description"
-            label="Beskrivning"
-            placeholder="Beskriv mötets ämne och agenda"
-            type="textarea"
-            :error="errors.description"
-            required
-          />
-          
-          <div class="grid grid-cols-2 gap-4">
-            <BaseInput
-              v-model="form.date"
-              label="Datum"
-              placeholder="YYYY-MM-DD"
-              :error="errors.date"
-              required
-            />
-            
-            <BaseInput
-              v-model="form.time"
-              label="Tid"
-              placeholder="HH:MM"
-              :error="errors.time"
-              required
-            />
-          </div>
-          
-          <BaseInput
-            v-model="form.location"
-            label="Plats"
-            placeholder="Var ska mötet hållas?"
-            :error="errors.location"
+            v-model="form.time"
+            label="Tid"
+            type="time"
+            :error="errors.time"
             required
           />
         </div>
         
-        <template #footer>
-          <BaseButton variant="secondary" @click="closeModal">
-            Avbryt
-          </BaseButton>
-          <BaseButton type="submit" variant="primary" :loading="loading">
-            Skapa möte
-          </BaseButton>
-        </template>
-      </form>
+        <BaseInput
+          v-model="form.location"
+          label="Plats"
+          placeholder="Var ska mötet hållas?"
+          :error="errors.location"
+          required
+        />
+        
+        <BaseInput
+          v-model="form.maxAttendees"
+          label="Max antal deltagare"
+          type="number"
+          min="1"
+          placeholder="0 = obegränsat"
+        />
+      </div>
+      
+      <template #footer>
+        <BaseButton variant="secondary" @click="closeModal">
+          Avbryt
+        </BaseButton>
+        <BaseButton @click="handleCreateMeeting" :loading="loading">
+          Skapa möte
+        </BaseButton>
+      </template>
     </BaseModal>
   </DefaultLayout>
 </template>
@@ -104,9 +110,11 @@ import BaseInput from '@/components/BaseInput.vue'
 import BaseModal from '@/components/BaseModal.vue'
 import { useMeetings } from '@/composables/useMeetings'
 import { useNotifications } from '@/composables/useNotifications'
+import { useMeetingsStore } from '@/stores/meetings'
 
 const { createMeeting, loading } = useMeetings()
 const { success, error } = useNotifications()
+const meetingsStore = useMeetingsStore()
 
 const filter = ref('all')
 const showCreateModal = ref(false)
@@ -124,14 +132,66 @@ const form = ref({
 // Form errors
 const errors = ref<Record<string, string>>({})
 
-// Demo data - in real app this would come from store
-const meetings = [
-  { id: 1, title: 'Årsstämma 2024', description: 'Ordinarie årsstämma för bostadsrättsföreningen', date: '2024-05-22', time: '19:00', location: 'Föreningslokalen', attendees: 45, status: 'upcoming', statusText: 'Kommande' },
-  { id: 2, title: 'Styrelsemöte', description: 'Månatligt styrelsemöte', date: '2024-05-15', time: '18:00', location: 'Styrelserummet', attendees: 7, status: 'upcoming', statusText: 'Kommande' },
-  { id: 3, title: 'Extra möte', description: 'Diskussion om renoveringsprojekt', date: '2024-04-10', time: '19:00', location: 'Föreningslokalen', attendees: 32, status: 'past', statusText: 'Genomfört' }
-]
+// Initialize demo data if store is empty
+if (meetingsStore.meetings.length === 0) {
+  meetingsStore.addMeeting({
+    id: 'meeting-1',
+    title: 'Årsstämma 2024',
+    description: 'Ordinarie årsstämma för bostadsrättsföreningen',
+    date: '2024-05-22',
+    time: '19:00',
+    location: 'Föreningslokalen',
+    type: 'board',
+    status: 'upcoming',
+    attendees: 45,
+    maxAttendees: 100,
+    agenda: [],
+    documents: [],
+    createdBy: 'demo-user',
+    createdAt: new Date().toISOString()
+  })
+  
+  meetingsStore.addMeeting({
+    id: 'meeting-2',
+    title: 'Styrelsemöte',
+    description: 'Månatligt styrelsemöte',
+    date: '2024-05-15',
+    time: '18:00',
+    location: 'Styrelserummet',
+    type: 'board',
+    status: 'upcoming',
+    attendees: 7,
+    maxAttendees: 15,
+    agenda: [],
+    documents: [],
+    createdBy: 'demo-user',
+    createdAt: new Date().toISOString()
+  })
+  
+  meetingsStore.addMeeting({
+    id: 'meeting-3',
+    title: 'Extra möte',
+    description: 'Diskussion om renoveringsprojekt',
+    date: '2024-04-10',
+    time: '19:00',
+    location: 'Föreningslokalen',
+    type: 'board',
+    status: 'completed',
+    attendees: 32,
+    maxAttendees: 50,
+    agenda: [],
+    documents: [],
+    createdBy: 'demo-user',
+    createdAt: new Date().toISOString()
+  })
+}
 
 const filteredMeetings = computed(() => {
+  const meetings = meetingsStore.meetings.map(meeting => ({
+    ...meeting,
+    statusText: meeting.status === 'upcoming' ? 'Kommande' : meeting.status === 'completed' ? 'Genomfört' : meeting.status
+  }))
+  
   if (filter.value === 'all') return meetings
   return meetings.filter(m => m.status === filter.value)
 })

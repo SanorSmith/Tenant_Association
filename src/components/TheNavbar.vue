@@ -39,12 +39,10 @@
               @click="toggleUserMenu"
               class="flex items-center gap-2 p-2 rounded-lg hover:bg-gray-100 transition-colors"
             >
-              <img
-                :src="authStore.user?.avatar"
-                :alt="authStore.user?.name"
-                class="w-8 h-8 rounded-full object-cover"
-              />
-              <span class="hidden md:block text-sm font-medium text-navy">{{ authStore.user?.name }}</span>
+              <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                <span class="text-white font-bold text-sm">{{ user?.name?.charAt(0).toUpperCase() || 'U' }}</span>
+              </div>
+              <span class="hidden md:block text-sm font-medium text-navy">{{ user?.name }}</span>
               <svg class="w-4 h-4 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
               </svg>
@@ -53,8 +51,8 @@
             <Transition name="dropdown">
               <div v-if="showUserMenu" class="user-menu">
                 <div class="px-4 py-3 border-b border-gray-200">
-                  <p class="text-sm font-medium text-navy">{{ authStore.user?.name }}</p>
-                  <p class="text-xs text-textGray">{{ authStore.user?.email }}</p>
+                  <p class="text-sm font-medium text-navy">{{ user?.name }}</p>
+                  <p class="text-xs text-textGray">{{ user?.email }}</p>
                 </div>
                 <RouterLink to="/settings" class="menu-item" @click="showUserMenu = false">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -97,10 +95,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '@/stores/auth'
+import { useAuth } from '@/composables/useAuth'
 
 const router = useRouter()
-const authStore = useAuthStore()
+const { user, logout } = useAuth()
 
 const showMobileMenu = ref(false)
 const showUserMenu = ref(false)
@@ -124,9 +122,8 @@ const toggleUserMenu = () => {
 }
 
 const handleLogout = () => {
-  authStore.logout()
+  logout()
   showUserMenu.value = false
-  router.push('/login')
 }
 </script>
 

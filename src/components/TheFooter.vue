@@ -44,10 +44,10 @@
         <div>
           <h3 class="text-lg font-semibold mb-4">Support</h3>
           <ul class="space-y-2">
-            <li><a href="#" class="footer-link">Hjälpcenter</a></li>
-            <li><a href="#" class="footer-link">Kontakta oss</a></li>
-            <li><a href="#" class="footer-link">FAQ</a></li>
-            <li><a href="#" class="footer-link">Användarguide</a></li>
+            <li><RouterLink to="/hjalpcenter" class="footer-link">Hjälpcenter</RouterLink></li>
+            <li><RouterLink to="/kontakt" class="footer-link">Kontakta oss</RouterLink></li>
+            <li><RouterLink to="/faq" class="footer-link">FAQ</RouterLink></li>
+            <li><RouterLink to="/anvandarguide" class="footer-link">Användarguide</RouterLink></li>
           </ul>
         </div>
 
