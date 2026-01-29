@@ -117,7 +117,8 @@ const form = ref({
   description: '',
   date: '',
   time: '',
-  location: ''
+  location: '',
+  maxAttendees: 0
 })
 
 // Form errors
@@ -174,7 +175,8 @@ const handleCreateMeeting = async () => {
     description: form.value.description,
     date: form.value.date,
     time: form.value.time,
-    location: form.value.location
+    location: form.value.location,
+    maxAttendees: form.value.maxAttendees
   })
   
   if (result.success) {
@@ -195,7 +197,8 @@ const closeModal = () => {
     description: '',
     date: '',
     time: '',
-    location: ''
+    location: '',
+    maxAttendees: 0
   }
   errors.value = {}
 }

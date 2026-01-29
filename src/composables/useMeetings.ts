@@ -25,15 +25,18 @@ export function useMeetings() {
       const newMeeting: Meeting = {
         id: `meeting-${Date.now()}`,
         title: meetingData.title || '',
+        description: meetingData.description || '',
         date: meetingData.date || '',
         time: meetingData.time || '',
         location: meetingData.location || '',
-        agenda: meetingData.agenda || [],
-        attendees: meetingData.attendees || 0,
+        type: 'board',
         status: 'upcoming',
-        description: meetingData.description,
+        attendees: 0,
         maxAttendees: meetingData.maxAttendees,
-        organizer: meetingData.organizer,
+        agenda: [],
+        documents: [],
+        createdBy: 'current-user', // This would come from auth store
+        createdAt: new Date().toISOString(),
       }
 
       store.addMeeting(newMeeting)
