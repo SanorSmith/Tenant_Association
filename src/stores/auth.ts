@@ -54,7 +54,9 @@ export const useAuthStore = defineStore('auth', () => {
   ]
 
   const login = (email: string, password: string): boolean => {
-    // Demo credentials - any password works for demo emails
+    console.log('Login attempt:', { email, password })
+    
+    // Demo credentials - exact match required
     const demoCredentials = [
       { email: 'anna@solhojden.se', password: 'solhojden123' },
       { email: 'erik@parkgatan.se', password: 'parkgatan123' },
@@ -67,15 +69,19 @@ export const useAuthStore = defineStore('auth', () => {
       cred.email === email && cred.password === password
     )
 
+    console.log('Valid credential found:', validCredential)
+
     if (validCredential) {
       const loggedInUser = demoUsers.find(u => u.email === email) || demoUsers[0]
       user.value = loggedInUser
       isAuthenticated.value = true
       localStorage.setItem('grannskapet_auth', 'true')
       localStorage.setItem('grannskapet_user', JSON.stringify(loggedInUser))
+      console.log('Login successful for:', loggedInUser.name)
       return true
     }
 
+    console.log('Login failed - invalid credentials')
     return false
   }
 
@@ -90,10 +96,21 @@ export const useAuthStore = defineStore('auth', () => {
     const authStatus = localStorage.getItem('grannskapet_auth')
     const savedUser = localStorage.getItem('grannskapet_user')
     
+    console.log('Init auth - checking localStorage:', { authStatus, savedUser })
+    
     if (authStatus === 'true' && savedUser) {
       user.value = JSON.parse(savedUser)
       isAuthenticated.value = true
+      console.log('Auto-logged in as:', user.value?.name)
     }
+  }
+
+  const clearAuth = () => {
+    user.value = null
+    isAuthenticated.value = false
+    localStorage.removeItem('grannskapet_auth')
+    localStorage.removeItem('grannskapet_user')
+    console.log('Auth state cleared')
   }
 
   const isAdmin = computed(() => user.value?.role === 'admin')
@@ -106,6 +123,7 @@ export const useAuthStore = defineStore('auth', () => {
     isBoard,
     login,
     logout,
-    initAuth
+    initAuth,
+    clearAuth
   }
 })

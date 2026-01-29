@@ -87,6 +87,13 @@
                   <p><strong>Lösenord:</strong> centrumhuset123</p>
                 </div>
               </div>
+              
+              <button 
+                @click="clearAuthState"
+                class="mt-3 w-full text-xs bg-red-100 text-red-700 px-2 py-1 rounded hover:bg-red-200 transition-colors"
+              >
+                Rensa autentisering (test)
+              </button>
             </div>
           </div>
         </BaseCard>
@@ -150,6 +157,13 @@ const handleLogin = async () => {
     
     loading.value = false
   }, 1000)
+}
+
+const clearAuthState = () => {
+  authStore.clearAuth()
+  email.value = ''
+  password.value = ''
+  errors.value = { email: '', password: '', general: '' }
 }
 </script>
 
