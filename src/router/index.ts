@@ -17,45 +17,24 @@ const routes = [
     path: '/association/:id',
     name: 'association-detail',
     component: () => import('@/views/public/AssociationDetailView.vue'),
-    meta: { 
-      requiresAuth: false,
-      title: 'Föreningsdetaljer'
-    }
+    meta: { public: true }
   },
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: () => import('@/views/admin/AdminDashboardView.vue'),
+    component: () => import('@/views/DashboardView.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/meetings',
     name: 'meetings',
-    component: () => import('@/views/admin/MeetingsManagementView.vue'),
+    component: () => import('@/views/MeetingsView.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/documents',
     name: 'documents',
-    component: () => import('@/views/admin/DocumentsManagementView.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/activities',
-    name: 'activities',
-    component: () => import('@/views/admin/ActivitiesManagementView.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/bookings',
-    name: 'bookings',
-    component: () => import('@/views/admin/BookingsManagementView.vue'),
-    meta: { requiresAuth: true }
-  },
-  {
-    path: '/proposals',
-    name: 'proposals',
-    component: () => import('@/views/admin/ProposalsManagementView.vue'),
+    component: () => import('@/views/DocumentsView.vue'),
     meta: { requiresAuth: true }
   },
   {
@@ -65,9 +44,21 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/activities',
+    name: 'activities',
+    component: () => import('@/views/ActivitiesView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/premises',
     name: 'premises',
     component: () => import('@/views/PremisesView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/bookings',
+    name: 'bookings',
+    component: () => import('@/views/BookingsView.vue'),
     meta: { requiresAuth: true }
   },
   {
