@@ -85,7 +85,8 @@ router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth && !isAuthenticated) {
     next({ name: 'login', query: { redirect: to.fullPath } })
   } else if (to.name === 'login' && isAuthenticated) {
-    next({ name: 'dashboard' })
+    // Temporarily disabled for testing - allow access to login page even if authenticated
+    next()
   } else {
     next()
   }

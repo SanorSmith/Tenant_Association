@@ -85,6 +85,12 @@ export const useAuthStore = defineStore('auth', () => {
     
     console.log('Init auth - checking localStorage:', { authStatus, savedUser })
     
+    // Temporarily clear auth state for testing
+    if (authStatus === 'true' && savedUser) {
+      console.log('Clearing existing auth state for testing')
+      clearAuth()
+    }
+    
     if (authStatus === 'true' && savedUser) {
       user.value = JSON.parse(savedUser)
       isAuthenticated.value = true
