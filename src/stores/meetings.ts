@@ -32,6 +32,13 @@ export const useMeetingsStore = defineStore('meetings', () => {
     }
   }
 
+  const deleteMeeting = (id: string) => {
+    const index = meetings.value.findIndex(m => m.id === id)
+    if (index !== -1) {
+      meetings.value.splice(index, 1)
+    }
+  }
+
   return {
     meetings,
     upcomingMeetings,
@@ -39,6 +46,7 @@ export const useMeetingsStore = defineStore('meetings', () => {
     initDemoData,
     getMeetingById,
     addMeeting,
-    updateMeeting
+    updateMeeting,
+    deleteMeeting
   }
 })

@@ -36,6 +36,13 @@ export const useBookingsStore = defineStore('bookings', () => {
     }
   }
 
+  const deleteBooking = (id: string) => {
+    const index = bookings.value.findIndex(b => b.id === id)
+    if (index !== -1) {
+      bookings.value.splice(index, 1)
+    }
+  }
+
   return {
     bookings,
     pendingBookings,
@@ -44,6 +51,7 @@ export const useBookingsStore = defineStore('bookings', () => {
     initDemoData,
     getBookingById,
     addBooking,
-    updateBooking
+    updateBooking,
+    deleteBooking
   }
 })

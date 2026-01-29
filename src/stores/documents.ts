@@ -34,6 +34,13 @@ export const useDocumentsStore = defineStore('documents', () => {
     )
   }
 
+  const deleteDocument = (id: string) => {
+    const index = documents.value.findIndex(d => d.id === id)
+    if (index !== -1) {
+      documents.value.splice(index, 1)
+    }
+  }
+
   return {
     documents,
     documentsByType,
@@ -41,6 +48,7 @@ export const useDocumentsStore = defineStore('documents', () => {
     initDemoData,
     getDocumentById,
     addDocument,
-    searchDocuments
+    searchDocuments,
+    deleteDocument
   }
 })

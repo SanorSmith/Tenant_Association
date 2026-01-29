@@ -36,6 +36,13 @@ export const useActivitiesStore = defineStore('activities', () => {
     }
   }
 
+  const deleteActivity = (id: string) => {
+    const index = activities.value.findIndex(a => a.id === id)
+    if (index !== -1) {
+      activities.value.splice(index, 1)
+    }
+  }
+
   return {
     activities,
     upcomingActivities,
@@ -44,6 +51,7 @@ export const useActivitiesStore = defineStore('activities', () => {
     initDemoData,
     getActivityById,
     addActivity,
-    updateActivity
+    updateActivity,
+    deleteActivity
   }
 })
