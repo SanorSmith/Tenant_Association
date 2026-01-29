@@ -16,11 +16,9 @@
         </div>
 
         <div class="flex items-center gap-3">
-          <RouterLink to="/login">
-            <BaseButton variant="outline" size="md">
+          <BaseButton variant="outline" size="md" @click="goToLogin">
               Logga in
             </BaseButton>
-          </RouterLink>
           <button
             @click="toggleMobileMenu"
             class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -40,11 +38,9 @@
           <a href="#features" class="mobile-nav-link" @click="showMobileMenu = false">Funktioner</a>
           <a href="#about" class="mobile-nav-link" @click="showMobileMenu = false">Om oss</a>
           <a href="#contact" class="mobile-nav-link" @click="showMobileMenu = false">Kontakt</a>
-          <RouterLink to="/login" @click="showMobileMenu = false">
-            <BaseButton variant="outline" size="md" class="w-full">
+          <BaseButton variant="outline" size="md" class="w-full" @click="goToLoginMobile">
               Logga in
             </BaseButton>
-          </RouterLink>
         </div>
       </div>
     </Transition>
@@ -53,13 +49,23 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
 import BaseButton from './BaseButton.vue'
 
+const router = useRouter()
 const showMobileMenu = ref(false)
 
 const toggleMobileMenu = () => {
   showMobileMenu.value = !showMobileMenu.value
+}
+
+const goToLogin = () => {
+  router.push('/login')
+}
+
+const goToLoginMobile = () => {
+  showMobileMenu.value = false
+  router.push('/login')
 }
 </script>
 

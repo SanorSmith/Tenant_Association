@@ -15,7 +15,7 @@
               <BaseButton variant="primary" size="lg" @click="scrollToSearch">
                 Hitta din förening
               </BaseButton>
-              <BaseButton variant="outline" size="lg" @click="router.push('/login')">
+              <BaseButton variant="outline" size="lg" @click="goToLogin">
                 Logga in
               </BaseButton>
             </div>
@@ -269,6 +269,10 @@ const scrollToSearch = () => {
 
 const viewAssociation = (id: string) => {
   router.push({ name: 'association-detail', params: { id } })
+}
+
+const goToLogin = () => {
+  router.push('/login')
 }
 
 onMounted(() => {
