@@ -1,5 +1,6 @@
 <template>
-  <div class="association-detail-page min-h-screen bg-gray-50">
+  <PublicLayout>
+    <div class="association-detail-page bg-gray-50">
     <section class="bg-gradient-to-br from-primary-50 to-white py-12 border-b border-gray-200">
       <div class="container-custom">
         <div class="max-w-4xl">
@@ -192,12 +193,14 @@
       :association-id="associationId"
       @submitted="handleBookingSubmitted"
     />
-  </div>
+    </div>
+  </PublicLayout>
 </template>
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import PublicLayout from '@/layouts/PublicLayout.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseBadge from '@/components/BaseBadge.vue'
 import ProposalModal from '@/components/modals/ProposalModal.vue'
