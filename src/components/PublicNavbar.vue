@@ -40,6 +40,11 @@
           <a href="#features" class="mobile-nav-link" @click="showMobileMenu = false">Funktioner</a>
           <a href="#about" class="mobile-nav-link" @click="showMobileMenu = false">Om oss</a>
           <a href="#contact" class="mobile-nav-link" @click="showMobileMenu = false">Kontakt</a>
+          <RouterLink to="/login" @click="showMobileMenu = false">
+            <BaseButton variant="outline" size="md" class="w-full">
+              Logga in
+            </BaseButton>
+          </RouterLink>
         </div>
       </div>
     </Transition>
@@ -48,6 +53,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 import BaseButton from './BaseButton.vue'
 
 const showMobileMenu = ref(false)

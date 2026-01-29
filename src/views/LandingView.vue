@@ -187,7 +187,7 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted, h } from 'vue'
-import { useRouter } from 'vue-router'
+import { useRouter, RouterLink } from 'vue-router'
 import { useAssociationsStore } from '@/stores/associations'
 import PublicLayout from '@/layouts/PublicLayout.vue'
 import BaseButton from '@/components/BaseButton.vue'
