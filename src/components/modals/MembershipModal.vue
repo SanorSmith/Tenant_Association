@@ -111,17 +111,17 @@
           placeholder="Berätta mer om dig själv och dina idéer..."
         ></textarea>
       </div>
-
-      <template #footer>
-        <BaseButton variant="secondary" @click="close">
-          Avbryt
-        </BaseButton>
-        
-        <BaseButton type="submit" :loading="loading">
-          Skicka ansökan
-        </BaseButton>
-      </template>
     </form>
+
+    <template #footer>
+      <BaseButton variant="secondary" @click="close">
+        Avbryt
+      </BaseButton>
+      
+      <BaseButton @click="handleSubmit" :loading="loading">
+        Skicka ansökan
+      </BaseButton>
+    </template>
   </BaseModal>
 </template>
 

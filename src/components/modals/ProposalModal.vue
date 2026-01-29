@@ -38,17 +38,17 @@
           {{ errors.proposal }}
         </p>
       </div>
-
-      <template #footer>
-        <BaseButton variant="secondary" @click="close">
-          Avbryt
-        </BaseButton>
-        
-        <BaseButton type="submit" :loading="loading">
-          Skicka förslag
-        </BaseButton>
-      </template>
     </form>
+
+    <template #footer>
+      <BaseButton variant="secondary" @click="close">
+        Avbryt
+      </BaseButton>
+      
+      <BaseButton @click="handleSubmit" :loading="loading">
+        Skicka förslag
+      </BaseButton>
+    </template>
   </BaseModal>
 </template>
 
