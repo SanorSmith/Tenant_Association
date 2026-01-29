@@ -63,11 +63,12 @@
             <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <p class="text-sm font-medium text-blue-900 mb-2">Demo-inloggning</p>
               <p class="text-xs text-blue-700 mb-3">
-                Detta är en demo-version. Ange valfri e-postadress och lösenord för att logga in.
+                Fyll i valfri e-postadress och lösenord för att logga in i demo-läge.
               </p>
               <div class="space-y-1 text-xs text-blue-600">
-                <p><strong>E-post:</strong> valfri@email.se</p>
-                <p><strong>Lösenord:</strong> valfritt123</p>
+                <p><strong>E-post:</strong> Din e-postadress</p>
+                <p><strong>Lösenord:</strong> Ditt lösenord</p>
+                <p class="mt-2 text-blue-500">✅ Alla kombinationer fungerar för demo</p>
               </div>
               
               <button 

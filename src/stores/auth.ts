@@ -56,9 +56,10 @@ export const useAuthStore = defineStore('auth', () => {
   const login = (email: string, password: string): boolean => {
     console.log('Login attempt:', { email, password })
     
-    // Demo mode - accept any email and password
+    // Demo login - accept any email and password
     if (email && password) {
-      const loggedInUser = demoUsers[0] // Always login as admin user for demo
+      // Use the first demo user for any login attempt
+      const loggedInUser = demoUsers[0] // Anna Andersson (Admin)
       user.value = loggedInUser
       isAuthenticated.value = true
       localStorage.setItem('grannskapet_auth', 'true')
@@ -67,7 +68,7 @@ export const useAuthStore = defineStore('auth', () => {
       return true
     }
 
-    console.log('Login failed - missing credentials')
+    console.log('Login failed - email and password required')
     return false
   }
 
