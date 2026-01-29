@@ -5,7 +5,9 @@
         <h1 class="text-3xl font-bold text-accent mb-2">Möten</h1>
         <p class="text-textGray">Hantera och planera föreningsmöten</p>
       </div>
-      <BaseButton variant="primary" size="md">Skapa nytt möte</BaseButton>
+      <BaseButton variant="primary" size="md" @click="showCreateModal = true" :loading="loading">
+        Skapa nytt möte
+      </BaseButton>
     </div>
 
     <div class="mb-6 flex gap-4">
@@ -30,6 +32,65 @@
         </div>
       </BaseCard>
     </div>
+
+    <!-- Create Meeting Modal -->
+    <BaseModal v-model="showCreateModal" title="Skapa nytt möte" size="md">
+      <form @submit.prevent="handleCreateMeeting">
+        <div class="space-y-4">
+          <BaseInput
+            v-model="form.title"
+            label="Mötets titel"
+            placeholder="Ange titel för mötet"
+            :error="errors.title"
+            required
+          />
+          
+          <BaseInput
+            v-model="form.description"
+            label="Beskrivning"
+            placeholder="Beskriv mötets ämne och agenda"
+            type="textarea"
+            :error="errors.description"
+            required
+          />
+          
+          <div class="grid grid-cols-2 gap-4">
+            <BaseInput
+              v-model="form.date"
+              label="Datum"
+              placeholder="YYYY-MM-DD"
+              :error="errors.date"
+              required
+            />
+            
+            <BaseInput
+              v-model="form.time"
+              label="Tid"
+              placeholder="HH:MM"
+              :error="errors.time"
+              required
+            />
+          </div>
+          
+          <BaseInput
+            v-model="form.location"
+            label="Plats"
+            placeholder="Var ska mötet hållas?"
+            :error="errors.location"
+            required
+          />
+        </div>
+        
+        <template #footer>
+          <BaseButton variant="secondary" @click="closeModal">
+            Avbryt
+          </BaseButton>
+          <BaseButton type="submit" variant="primary" :loading="loading">
+            Skapa möte
+          </BaseButton>
+        </template>
+      </form>
+    </BaseModal>
   </DefaultLayout>
 </template>
 
@@ -39,9 +100,30 @@ import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import BaseCard from '@/components/BaseCard.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import BaseBadge from '@/components/BaseBadge.vue'
+import BaseInput from '@/components/BaseInput.vue'
+import BaseModal from '@/components/BaseModal.vue'
+import { useMeetings } from '@/composables/useMeetings'
+import { useNotifications } from '@/composables/useNotifications'
+
+const { createMeeting, loading } = useMeetings()
+const { success, error } = useNotifications()
 
 const filter = ref('all')
+const showCreateModal = ref(false)
 
+// Form data
+const form = ref({
+  title: '',
+  description: '',
+  date: '',
+  time: '',
+  location: ''
+})
+
+// Form errors
+const errors = ref<Record<string, string>>({})
+
+// Demo data - in real app this would come from store
 const meetings = [
   { id: 1, title: 'Årsstämma 2024', description: 'Ordinarie årsstämma för bostadsrättsföreningen', date: '2024-05-22', time: '19:00', location: 'Föreningslokalen', attendees: 45, status: 'upcoming', statusText: 'Kommande' },
   { id: 2, title: 'Styrelsemöte', description: 'Månatligt styrelsemöte', date: '2024-05-15', time: '18:00', location: 'Styrelserummet', attendees: 7, status: 'upcoming', statusText: 'Kommande' },
@@ -52,4 +134,69 @@ const filteredMeetings = computed(() => {
   if (filter.value === 'all') return meetings
   return meetings.filter(m => m.status === filter.value)
 })
+
+// Form validation
+const validateForm = () => {
+  errors.value = {}
+  
+  if (!form.value.title.trim()) {
+    errors.value.title = 'Titel är obligatoriskt'
+  }
+  
+  if (!form.value.description.trim()) {
+    errors.value.description = 'Beskrivning är obligatorisk'
+  }
+  
+  if (!form.value.date) {
+    errors.value.date = 'Datum är obligatoriskt'
+  }
+  
+  if (!form.value.time) {
+    errors.value.time = 'Tid är obligatorisk'
+  }
+  
+  if (!form.value.location.trim()) {
+    errors.value.location = 'Plats är obligatorisk'
+  }
+  
+  return Object.keys(errors.value).length === 0
+}
+
+// Handle form submission
+const handleCreateMeeting = async () => {
+  if (!validateForm()) {
+    error('Vänligen korrigera felen i formuläret')
+    return
+  }
+  
+  const result = await createMeeting({
+    title: form.value.title,
+    description: form.value.description,
+    date: form.value.date,
+    time: form.value.time,
+    location: form.value.location
+  })
+  
+  if (result.success) {
+    success('Möte skapat successfully!')
+    closeModal()
+    // In a real app, you would refresh the meetings list from the store
+    // For now, we'll just show the success message
+  } else {
+    error(result.error || 'Kunde inte skapa mötet')
+  }
+}
+
+// Close modal and reset form
+const closeModal = () => {
+  showCreateModal.value = false
+  form.value = {
+    title: '',
+    description: '',
+    date: '',
+    time: '',
+    location: ''
+  }
+  errors.value = {}
+}
 </script>
