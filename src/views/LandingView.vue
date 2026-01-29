@@ -268,7 +268,7 @@ const scrollToSearch = () => {
 }
 
 const viewAssociation = (id: string) => {
-  console.log('View association:', id)
+  router.push({ name: 'association-detail', params: { id } })
 }
 
 onMounted(() => {

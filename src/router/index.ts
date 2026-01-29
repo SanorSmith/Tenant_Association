@@ -14,6 +14,12 @@ const routes = [
     meta: { public: true }
   },
   {
+    path: '/association/:id',
+    name: 'association-detail',
+    component: () => import('@/views/public/AssociationDetailView.vue'),
+    meta: { public: true }
+  },
+  {
     path: '/dashboard',
     name: 'dashboard',
     component: () => import('@/views/DashboardView.vue'),
