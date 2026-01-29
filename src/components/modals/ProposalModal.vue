@@ -57,6 +57,7 @@ import { ref, watch } from 'vue'
 import BaseModal from '@/components/BaseModal.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import { useProposalsStore } from '@/stores/proposals'
 
 interface Props {
   modelValue: boolean
@@ -69,6 +70,7 @@ const emit = defineEmits<{
   'submitted': []
 }>()
 
+const proposalsStore = useProposalsStore()
 const loading = ref(false)
 const isOpen = ref(props.modelValue)
 
@@ -107,11 +109,22 @@ const handleSubmit = async () => {
 
   loading.value = true
 
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  const result = await proposalsStore.submitProposal({
+    associationId: props.associationId,
+    name: form.value.name,
+    email: form.value.email,
+    phone: form.value.phone,
+    proposal: form.value.proposal,
+    status: 'pending',
+    submittedAt: new Date().toISOString(),
+  })
 
   loading.value = false
-  emit('submitted')
-  resetForm()
+
+  if (result.success) {
+    emit('submitted')
+    resetForm()
+  }
 }
 
 const resetForm = () => {

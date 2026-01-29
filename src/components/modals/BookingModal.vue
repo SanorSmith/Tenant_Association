@@ -88,6 +88,7 @@ import { ref, watch } from 'vue'
 import BaseModal from '@/components/BaseModal.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import { useBookingRequestsStore } from '@/stores/bookingRequests'
 
 interface Props {
   modelValue: boolean
@@ -100,6 +101,7 @@ const emit = defineEmits<{
   'submitted': []
 }>()
 
+const bookingRequestsStore = useBookingRequestsStore()
 const loading = ref(false)
 const isOpen = ref(props.modelValue)
 
@@ -147,11 +149,26 @@ const handleSubmit = async () => {
   if (!validate()) return
 
   loading.value = true
-  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  const result = await bookingRequestsStore.submitBooking({
+    associationId: props.associationId,
+    name: form.value.name,
+    email: form.value.email,
+    phone: form.value.phone,
+    date: form.value.date,
+    startTime: form.value.startTime,
+    endTime: form.value.endTime,
+    purpose: form.value.purpose,
+    status: 'pending',
+    submittedAt: new Date().toISOString(),
+  })
+
   loading.value = false
   
-  emit('submitted')
-  resetForm()
+  if (result.success) {
+    emit('submitted')
+    resetForm()
+  }
 }
 
 const resetForm = () => {

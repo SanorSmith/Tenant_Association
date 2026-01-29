@@ -78,6 +78,7 @@ import { ref, watch } from 'vue'
 import BaseModal from '@/components/BaseModal.vue'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import { useLHRequestsStore } from '@/stores/lhRequests'
 
 interface Props {
   modelValue: boolean
@@ -89,6 +90,7 @@ const emit = defineEmits<{
   'submitted': []
 }>()
 
+const lhRequestsStore = useLHRequestsStore()
 const loading = ref(false)
 const isOpen = ref(props.modelValue)
 
@@ -133,11 +135,24 @@ const handleSubmit = async () => {
   if (!validate()) return
 
   loading.value = true
-  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  const result = await lhRequestsStore.submitRequest({
+    name: form.value.name,
+    email: form.value.email,
+    phone: form.value.phone,
+    area: form.value.area,
+    postalCode: form.value.postalCode,
+    description: form.value.description,
+    status: 'pending',
+    submittedAt: new Date().toISOString(),
+  })
+
   loading.value = false
   
-  emit('submitted')
-  resetForm()
+  if (result.success) {
+    emit('submitted')
+    resetForm()
+  }
 }
 
 const resetForm = () => {
