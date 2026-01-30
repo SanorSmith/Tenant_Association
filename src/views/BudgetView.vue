@@ -62,9 +62,9 @@
       <!-- Distribution Donut Chart -->
       <BaseCard padding="md">
         <h3 class="text-base md:text-lg font-semibold text-navy mb-4">Fördelning</h3>
-        <div class="flex items-center justify-center">
-          <div class="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64">
-            <svg viewBox="0 0 100 100" class="transform -rotate-90">
+        <div class="flex items-center justify-center px-4">
+          <div class="relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 max-w-full">
+            <svg viewBox="0 0 100 100" class="transform -rotate-90 w-full h-full">
               <circle
                 v-for="(segment, index) in donutSegments"
                 :key="index"
@@ -82,12 +82,12 @@
           </div>
         </div>
         <div class="mt-4 space-y-2">
-          <div v-for="category in budgetByCategory" :key="category.name" class="flex items-center justify-between text-sm">
+          <div v-for="category in budgetByCategory" :key="category.name" class="flex items-center justify-between text-xs sm:text-sm">
             <div class="flex items-center gap-2">
-              <div class="w-3 h-3 rounded-full" :style="{ backgroundColor: category.color }"></div>
-              <span class="text-navy">{{ category.name }}</span>
+              <div class="w-3 h-3 rounded-full flex-shrink-0" :style="{ backgroundColor: category.color }"></div>
+              <span class="text-navy truncate">{{ category.name }}</span>
             </div>
-            <span class="text-navy font-semibold">{{ formatCurrency(category.amount) }}</span>
+            <span class="text-navy font-semibold whitespace-nowrap ml-2">{{ formatCurrency(category.amount) }}</span>
           </div>
         </div>
       </BaseCard>

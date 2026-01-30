@@ -1,11 +1,11 @@
 <template>
-  <div class="default-layout min-h-screen flex" @click="handleActivity" @keydown="handleActivity" @mousemove="handleActivity" @scroll="handleActivity">
+  <div class="default-layout min-h-screen flex overflow-x-hidden" @click="handleActivity" @keydown="handleActivity" @mousemove="handleActivity" @scroll="handleActivity">
     <TheSidebar />
     
-    <div class="flex-1 flex flex-col lg:ml-64">
+    <div class="flex-1 flex flex-col lg:ml-64 overflow-x-hidden">
       <TheNavbar />
       
-      <main class="main-content flex-1 bg-gray-50">
+      <main class="main-content flex-1 bg-gray-50 overflow-x-hidden">
         <div class="container-custom py-6">
           <slot></slot>
         </div>
