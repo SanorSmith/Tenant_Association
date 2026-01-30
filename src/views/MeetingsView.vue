@@ -1,13 +1,15 @@
 <template>
   <DefaultLayout>
-    <div class="mb-6 flex justify-between items-center">
-      <div>
-        <h1 class="text-3xl font-bold text-accent mb-2">Möten</h1>
-        <p class="text-textGray">Hantera och planera föreningsmöten</p>
+    <div class="mb-6">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <div>
+          <h1 class="text-3xl font-bold text-accent mb-2">Möten</h1>
+          <p class="text-textGray">Hantera och planera föreningsmöten</p>
+        </div>
+        <BaseButton variant="primary" size="md" @click="showCreateModal = true" :loading="loading" class="w-full sm:w-auto">
+          Skapa nytt möte
+        </BaseButton>
       </div>
-      <BaseButton variant="primary" size="md" @click="showCreateModal = true" :loading="loading">
-        Skapa nytt möte
-      </BaseButton>
     </div>
 
     <div class="mb-6 flex gap-4">
