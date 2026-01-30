@@ -1,12 +1,12 @@
 <template>
   <DefaultLayout>
     <div class="dashboard-view">
-      <div class="mb-8">
-        <h1 class="text-3xl font-bold text-accent mb-2">Dashboard</h1>
-        <p class="text-textGray">Välkommen tillbaka, {{ authStore.user?.name }}</p>
+      <div class="mb-6 md:mb-8">
+        <h1 class="text-2xl md:text-3xl font-bold text-accent mb-2">Dashboard</h1>
+        <p class="text-sm md:text-base text-textGray">Välkommen tillbaka, {{ authStore.user?.name }}</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
         <BaseCard v-for="stat in stats" :key="stat.label" hover padding="md">
           <div class="flex items-center justify-between">
             <div>
@@ -23,7 +23,7 @@
         </BaseCard>
       </div>
 
-      <div class="grid lg:grid-cols-3 gap-6 mb-8">
+      <div class="grid lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
         <div class="lg:col-span-2">
           <BaseCard title="Senaste aktiviteter" padding="none">
             <div class="divide-y divide-gray-200">
@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 gap-6">
+      <div class="grid md:grid-cols-2 gap-4 md:gap-6">
         <BaseCard title="Budgetöversikt" padding="md">
           <div class="space-y-4">
             <div>

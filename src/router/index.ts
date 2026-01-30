@@ -119,7 +119,22 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    // If there's a saved position (browser back/forward), use it
+    if (savedPosition) {
+      return savedPosition
+    }
+    // If navigating to a hash (like #features), scroll to that element
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: 'smooth'
+      }
+    }
+    // Otherwise, scroll to top
+    return { top: 0, behavior: 'smooth' }
+  }
 })
 
 router.beforeEach((to, from, next) => {
