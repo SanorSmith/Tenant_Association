@@ -33,7 +33,7 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const cardClasses = computed(() => {
-  const base = 'bg-white rounded-lg border border-gray-200'
+  const base = 'bg-white rounded-lg border border-gray-200 max-w-full overflow-hidden'
   const hoverClass = props.hover ? 'hover:shadow-lg hover:border-primary-300 transition-all duration-200 cursor-pointer' : ''
   
   const shadows = {
