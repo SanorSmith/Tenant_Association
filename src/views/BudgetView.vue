@@ -1,39 +1,41 @@
 <template>
   <DefaultLayout>
-    <div class="mb-6 flex justify-between items-center">
-      <div>
-        <h1 class="text-3xl font-bold text-accent mb-2">Budget 2024</h1>
-        <p class="text-textGray">Ekonomisk översikt för föreningen</p>
+    <div class="mb-4 md:mb-6">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold text-accent mb-2">Budget 2024</h1>
+          <p class="text-sm md:text-base text-textGray">Ekonomisk översikt för föreningen</p>
+        </div>
+        <BaseButton variant="primary" size="md" @click="showBudgetPostModal = true" class="w-full sm:w-auto">
+          + Ny budgetpost
+        </BaseButton>
       </div>
-      <BaseButton variant="primary" size="md" @click="showBudgetPostModal = true">
-        + Ny budgetpost
-      </BaseButton>
     </div>
 
     <!-- Budget Overview Card -->
-    <BaseCard padding="md" class="mb-6">
-      <h3 class="text-lg font-semibold text-navy mb-4">Budgetöversikt</h3>
-      <div class="grid md:grid-cols-3 gap-8">
+    <BaseCard padding="md" class="mb-4 md:mb-6">
+      <h3 class="text-base md:text-lg font-semibold text-navy mb-4">Budgetöversikt</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
         <div class="text-center">
-          <p class="text-sm text-textGray mb-2">Total budget</p>
-          <p class="text-4xl font-bold text-accent">{{ formatCurrency(totalBudget) }}</p>
+          <p class="text-xs sm:text-sm text-textGray mb-2">Total budget</p>
+          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-accent">{{ formatCurrency(totalBudget) }}</p>
         </div>
         <div class="text-center">
-          <p class="text-sm text-textGray mb-2">Antal poster</p>
-          <p class="text-4xl font-bold text-primary">{{ budgetPosts.length }}</p>
+          <p class="text-xs sm:text-sm text-textGray mb-2">Antal poster</p>
+          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">{{ budgetPosts.length }}</p>
         </div>
         <div class="text-center">
-          <p class="text-sm text-textGray mb-2">Kategorier</p>
-          <p class="text-4xl font-bold text-secondary">{{ uniqueCategories.length }}</p>
+          <p class="text-xs sm:text-sm text-textGray mb-2">Kategorier</p>
+          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary">{{ uniqueCategories.length }}</p>
         </div>
       </div>
     </BaseCard>
 
     <!-- Budget Charts -->
-    <div class="grid md:grid-cols-2 gap-6 mb-6">
+    <div class="grid md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
       <!-- Budget per Category Bar Chart -->
       <BaseCard padding="md">
-        <h3 class="text-lg font-semibold text-navy mb-4">Budget per kategori</h3>
+        <h3 class="text-base md:text-lg font-semibold text-navy mb-4">Budget per kategori</h3>
         <div class="space-y-4">
           <div v-for="category in budgetByCategory" :key="category.name" class="space-y-2">
             <div class="flex justify-between text-sm">
@@ -59,9 +61,9 @@
 
       <!-- Distribution Donut Chart -->
       <BaseCard padding="md">
-        <h3 class="text-lg font-semibold text-navy mb-4">Fördelning</h3>
+        <h3 class="text-base md:text-lg font-semibold text-navy mb-4">Fördelning</h3>
         <div class="flex items-center justify-center">
-          <div class="relative w-64 h-64">
+          <div class="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64">
             <svg viewBox="0 0 100 100" class="transform -rotate-90">
               <circle
                 v-for="(segment, index) in donutSegments"
@@ -93,51 +95,51 @@
 
     <!-- Budget Posts Table -->
     <BaseCard padding="md">
-      <h3 class="text-lg font-semibold text-navy mb-4">Budgetposter</h3>
+      <h3 class="text-base md:text-lg font-semibold text-navy mb-4">Budgetposter</h3>
       
       <!-- Filters -->
-      <div class="flex gap-4 mb-4">
-        <select v-model="selectedCategory" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+      <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-4">
+        <select v-model="selectedCategory" class="px-3 sm:px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
           <option value="">Alla kategorier</option>
           <option v-for="cat in uniqueCategories" :key="cat" :value="cat">{{ cat }}</option>
         </select>
-        <select v-model="selectedYear" class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+        <select v-model="selectedYear" class="px-3 sm:px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
           <option value="2024">2024</option>
           <option value="2023">2023</option>
         </select>
       </div>
 
       <!-- Budget Posts Table -->
-      <div class="overflow-x-auto">
-        <table class="w-full">
+      <div class="overflow-x-auto -mx-4 sm:mx-0">
+        <table class="w-full min-w-[640px]">
           <thead class="bg-gray-50 border-b">
             <tr>
-              <th class="px-4 py-3 text-left text-sm font-semibold text-navy">Kategori</th>
-              <th class="px-4 py-3 text-left text-sm font-semibold text-navy">Beskrivning</th>
-              <th class="px-4 py-3 text-right text-sm font-semibold text-navy">Belopp</th>
-              <th class="px-4 py-3 text-center text-sm font-semibold text-navy">Aktivitet</th>
-              <th class="px-4 py-3 text-center text-sm font-semibold text-navy">Åtgärder</th>
+              <th class="px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-navy">Kategori</th>
+              <th class="px-2 sm:px-4 py-3 text-left text-xs sm:text-sm font-semibold text-navy">Beskrivning</th>
+              <th class="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold text-navy">Belopp</th>
+              <th class="px-2 sm:px-4 py-3 text-center text-xs sm:text-sm font-semibold text-navy hidden sm:table-cell">Aktivitet</th>
+              <th class="px-2 sm:px-4 py-3 text-center text-xs sm:text-sm font-semibold text-navy">Åtgärder</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="post in filteredBudgetPosts" :key="post.id" class="border-b hover:bg-gray-50">
-              <td class="px-4 py-3">
+              <td class="px-2 sm:px-4 py-3">
                 <span 
-                  class="inline-block px-3 py-1 rounded-full text-xs font-medium text-white"
+                  class="inline-block px-2 sm:px-3 py-1 rounded-full text-xs font-medium text-white"
                   :style="{ backgroundColor: getCategoryColor(post.category) }"
                 >
                   {{ post.category }}
                 </span>
               </td>
-              <td class="px-4 py-3 text-sm text-navy">{{ post.description }}</td>
-              <td class="px-4 py-3 text-right text-sm font-semibold" :class="post.amount >= 0 ? 'text-green-600' : 'text-accent'">
+              <td class="px-2 sm:px-4 py-3 text-xs sm:text-sm text-navy">{{ post.description }}</td>
+              <td class="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold" :class="post.amount >= 0 ? 'text-green-600' : 'text-accent'">
                 {{ formatCurrency(post.amount) }}
               </td>
-              <td class="px-4 py-3 text-center">
+              <td class="px-2 sm:px-4 py-3 text-center hidden sm:table-cell">
                 <span v-if="post.activity" class="text-xs text-textGray">{{ post.activity }}</span>
                 <span v-else class="text-xs text-gray-400">-</span>
               </td>
-              <td class="px-4 py-3 text-center">
+              <td class="px-2 sm:px-4 py-3 text-center">
                 <div class="flex items-center justify-center gap-2">
                   <button @click="editBudgetPost(post)" class="text-primary hover:text-accent">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
