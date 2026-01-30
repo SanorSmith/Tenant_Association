@@ -1,13 +1,15 @@
 <template>
   <DefaultLayout>
-    <div class="mb-6 flex justify-between items-center">
-      <div>
-        <h1 class="text-3xl font-bold text-accent mb-2">Aktiviteter</h1>
-        <p class="text-textGray">Planera och hantera föreningens aktiviteter och evenemang</p>
+    <div class="mb-6">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+        <div>
+          <h1 class="text-3xl font-bold text-accent mb-2">Aktiviteter</h1>
+          <p class="text-textGray">Planera och hantera föreningens aktiviteter och evenemang</p>
+        </div>
+        <BaseButton variant="primary" size="md" @click="showCreateModal = true" :loading="activitiesStore.isLoading" class="w-full sm:w-auto">
+          Skapa aktivitet
+        </BaseButton>
       </div>
-      <BaseButton variant="primary" size="md" @click="showCreateModal = true" :loading="activitiesStore.isLoading">
-        Skapa aktivitet
-      </BaseButton>
     </div>
 
     <!-- Statistics Cards -->
