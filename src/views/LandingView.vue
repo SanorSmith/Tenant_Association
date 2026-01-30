@@ -1,13 +1,13 @@
 <template>
   <PublicLayout>
-    <section class="hero bg-gradient-to-br from-primary-50 to-white py-20">
+    <section class="hero bg-gradient-to-br from-primary-50 to-white py-12 md:py-20">
       <div class="container-custom">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div class="animate-fade-in">
-            <h1 class="text-5xl md:text-6xl font-bold text-accent mb-6 leading-tight">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-accent mb-4 md:mb-6 leading-tight">
               Förenkla din föreningsförvaltning
             </h1>
-            <p class="text-xl text-navy mb-8 leading-relaxed">
+            <p class="text-base sm:text-lg md:text-xl text-navy mb-6 md:mb-8 leading-relaxed">
               Grannskapet är den kompletta plattformen för bostadsrättsföreningar. 
               Hantera möten, dokument, budget och aktiviteter på ett enkelt sätt.
             </p>
@@ -19,15 +19,15 @@
                 Logga in
               </BaseButton>
             </div>
-            <div class="mt-8 flex items-center gap-8 text-sm text-textGray">
+            <div class="mt-6 md:mt-8 flex flex-wrap items-center gap-4 md:gap-8 text-xs sm:text-sm text-textGray">
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
                 <span>100+ föreningar</span>
               </div>
               <div class="flex items-center gap-2">
-                <svg class="w-5 h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-primary" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
                 <span>5000+ medlemmar</span>
@@ -45,16 +45,16 @@
       </div>
     </section>
 
-    <section id="features" class="py-20 bg-white">
+    <section id="features" class="py-12 md:py-20 bg-white">
       <div class="container-custom">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-bold text-accent mb-4">Allt du behöver på ett ställe</h2>
-          <p class="text-xl text-textGray max-w-2xl mx-auto">
+        <div class="text-center mb-8 md:mb-16">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-accent mb-3 md:mb-4 px-4">Allt du behöver på ett ställe</h2>
+          <p class="text-base sm:text-lg md:text-xl text-textGray max-w-2xl mx-auto px-4">
             Kraftfulla verktyg för effektiv föreningsförvaltning
           </p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           <div v-for="feature in features" :key="feature.title" class="feature-card">
             <div class="w-14 h-14 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
               <component :is="feature.icon" class="w-7 h-7 text-primary" />
@@ -66,20 +66,20 @@
       </div>
     </section>
 
-    <section id="search" ref="searchSection" class="py-20 bg-gray-50">
+    <section id="search" ref="searchSection" class="py-12 md:py-20 bg-gray-50">
       <div class="container-custom">
-        <div class="text-center mb-12">
-          <h2 class="text-4xl font-bold text-accent mb-4">Hitta din förening</h2>
-          <p class="text-xl text-textGray">Sök bland våra anslutna bostadsrättsföreningar</p>
+        <div class="text-center mb-8 md:mb-12">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-accent mb-3 md:mb-4 px-4">Hitta din förening</h2>
+          <p class="text-base sm:text-lg md:text-xl text-textGray px-4">Sök bland våra anslutna bostadsrättsföreningar</p>
         </div>
 
-        <div class="max-w-2xl mx-auto mb-12">
+        <div class="max-w-2xl mx-auto mb-8 md:mb-12 px-4">
           <div class="relative">
             <input
               v-model="searchQuery"
               type="text"
               placeholder="Sök på föreningsnamn, stad eller adress..."
-              class="w-full px-6 py-4 pr-12 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none text-lg"
+              class="w-full px-4 sm:px-6 py-3 sm:py-4 pr-10 sm:pr-12 rounded-xl border-2 border-gray-200 focus:border-primary focus:outline-none text-sm sm:text-base md:text-lg"
             />
             <svg class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        <div v-if="filteredAssociations.length > 0" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div v-if="filteredAssociations.length > 0" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           <div v-for="assoc in filteredAssociations" :key="assoc.id" class="association-card">
             <img :src="assoc.image" :alt="assoc.name" class="w-full h-48 object-cover rounded-t-xl" />
             <div class="p-6">
@@ -114,50 +114,50 @@
       </div>
     </section>
 
-    <section id="about" class="py-20 bg-white">
+    <section id="about" class="py-12 md:py-20 bg-white">
       <div class="container-custom">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
+        <div class="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div class="hidden md:block">
             <img 
               src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800" 
               alt="Team meeting"
               class="rounded-2xl shadow-xl"
             />
           </div>
-          <div>
-            <h2 class="text-4xl font-bold text-accent mb-6">Varför välja Grannskapet?</h2>
-            <div class="space-y-6">
-              <div class="flex gap-4">
-                <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                  <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="px-4">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-accent mb-4 md:mb-6">Varför välja Grannskapet?</h2>
+            <div class="space-y-4 md:space-y-6">
+              <div class="flex gap-3 md:gap-4">
+                <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-lg font-semibold text-navy mb-2">Användarvänligt</h3>
-                  <p class="text-textGray">Intuitivt gränssnitt som alla kan använda, oavsett teknisk nivå.</p>
+                  <h3 class="text-base sm:text-lg font-semibold text-navy mb-1 sm:mb-2">Användarvänligt</h3>
+                  <p class="text-sm sm:text-base text-textGray">Intuitivt gränssnitt som alla kan använda, oavsett teknisk nivå.</p>
                 </div>
               </div>
-              <div class="flex gap-4">
-                <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                  <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="flex gap-3 md:gap-4">
+                <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-lg font-semibold text-navy mb-2">Säkert</h3>
-                  <p class="text-textGray">Dina data är skyddade med modern kryptering och säkerhetsåtgärder.</p>
+                  <h3 class="text-base sm:text-lg font-semibold text-navy mb-1 sm:mb-2">Säkert</h3>
+                  <p class="text-sm sm:text-base text-textGray">Dina data är skyddade med modern kryptering och säkerhetsåtgärder.</p>
                 </div>
               </div>
-              <div class="flex gap-4">
-                <div class="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-                  <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="flex gap-3 md:gap-4">
+                <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
                 <div>
-                  <h3 class="text-lg font-semibold text-navy mb-2">Snabbt</h3>
-                  <p class="text-textGray">Optimerad prestanda för snabb åtkomst till all information.</p>
+                  <h3 class="text-base sm:text-lg font-semibold text-navy mb-1 sm:mb-2">Snabbt</h3>
+                  <p class="text-sm sm:text-base text-textGray">Optimerad prestanda för snabb åtkomst till all information.</p>
                 </div>
               </div>
             </div>
@@ -166,10 +166,10 @@
       </div>
     </section>
 
-    <section id="contact" class="py-20 bg-primary text-white">
-      <div class="container-custom text-center">
-        <h2 class="text-4xl font-bold mb-6">Redo att komma igång?</h2>
-        <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
+    <section id="contact" class="py-12 md:py-20 bg-primary text-white">
+      <div class="container-custom text-center px-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">Redo att komma igång?</h2>
+        <p class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 opacity-90 max-w-2xl mx-auto">
           Kontakta oss idag för att lära dig mer om hur Grannskapet kan hjälpa din förening.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
