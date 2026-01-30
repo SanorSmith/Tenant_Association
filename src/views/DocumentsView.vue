@@ -1,18 +1,20 @@
 <template>
   <DefaultLayout>
-    <div class="mb-6 flex justify-between items-center">
-      <div>
-        <h1 class="text-3xl font-bold text-accent mb-2">Dokument</h1>
-        <p class="text-textGray">Föreningens dokumentarkiv</p>
+    <div class="mb-4 md:mb-6">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-4 md:mb-6">
+        <div>
+          <h1 class="text-2xl md:text-3xl font-bold text-accent mb-2">Dokument</h1>
+          <p class="text-sm md:text-base text-textGray">Föreningens dokumentarkiv</p>
+        </div>
+        <BaseButton variant="primary" size="md" @click="showDocumentTypeModal = true" class="w-full sm:w-auto">
+          Skapa dokument
+        </BaseButton>
       </div>
-      <BaseButton variant="primary" size="md" @click="showDocumentTypeModal = true">
-        Skapa dokument
-      </BaseButton>
+
+      <BaseInput v-model="searchQuery" type="search" placeholder="Sök dokument..." class="mb-4 md:mb-6" />
     </div>
 
-    <BaseInput v-model="searchQuery" type="search" placeholder="Sök dokument..." class="mb-6" />
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <BaseCard 
         v-for="doc in filteredDocuments" 
         :key="doc.id" 
