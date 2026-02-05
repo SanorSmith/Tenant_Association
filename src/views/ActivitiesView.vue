@@ -20,8 +20,10 @@
             <p class="text-sm text-textGray">Totalt aktiviteter</p>
             <p class="text-2xl font-bold text-navy">{{ activitiesStore.totalActivities }}</p>
           </div>
-          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-            <span class="text-xl">📊</span>
+          <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
           </div>
         </div>
       </BaseCard>
@@ -32,8 +34,10 @@
             <p class="text-sm text-textGray">Kommande</p>
             <p class="text-2xl font-bold text-navy">{{ activitiesStore.upcomingActivities.length }}</p>
           </div>
-          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-            <span class="text-xl">📅</span>
+          <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
           </div>
         </div>
       </BaseCard>
@@ -44,8 +48,10 @@
             <p class="text-sm text-textGray">Total deltagare</p>
             <p class="text-2xl font-bold text-navy">{{ activitiesStore.totalParticipants }}</p>
           </div>
-          <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-            <span class="text-xl">👥</span>
+          <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
           </div>
         </div>
       </BaseCard>
@@ -56,8 +62,10 @@
             <p class="text-sm text-textGray">Total budget</p>
             <p class="text-2xl font-bold text-navy">{{ formatCurrency(activitiesStore.totalBudget) }}</p>
           </div>
-          <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
-            <span class="text-xl">💰</span>
+          <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
           </div>
         </div>
       </BaseCard>
@@ -67,6 +75,7 @@
     <div class="mb-6 flex flex-wrap gap-2">
       <BaseButton 
         :variant="filter === 'all' ? 'primary' : 'outline'" 
+        :selected="filter === 'all'"
         size="sm" 
         @click="filter = 'all'"
       >
@@ -74,6 +83,7 @@
       </BaseButton>
       <BaseButton 
         :variant="filter === 'upcoming' ? 'primary' : 'outline'" 
+        :selected="filter === 'upcoming'"
         size="sm" 
         @click="filter = 'upcoming'"
       >
@@ -81,6 +91,7 @@
       </BaseButton>
       <BaseButton 
         :variant="filter === 'planning' ? 'primary' : 'outline'" 
+        :selected="filter === 'planning'"
         size="sm" 
         @click="filter = 'planning'"
       >
@@ -88,6 +99,7 @@
       </BaseButton>
       <BaseButton 
         :variant="filter === 'past' ? 'primary' : 'outline'" 
+        :selected="filter === 'past'"
         size="sm" 
         @click="filter = 'past'"
       >
@@ -129,8 +141,9 @@
           :alt="activity.title" 
           class="w-full h-48 object-cover"
         />
-        <div v-else class="w-full h-48 bg-gradient-to-br from-primary to-primary-600 flex items-center justify-center">
-          <span class="text-white text-4xl">{{ getActivityIcon(activity.type) }}</span>
+        <div v-else class="w-full h-48 relative">
+          <img :src="getActivityImage(activity.type)" :alt="activity.title" class="w-full h-48 object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         </div>
         
         <div class="p-4">
@@ -145,26 +158,37 @@
           
           <div class="space-y-2 text-sm">
             <div class="flex items-center gap-2">
-              <span class="text-textGray">📅</span>
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
               <span>{{ formatDate(activity.date) }} {{ activity.startTime }}-{{ activity.endTime }}</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-textGray">📍</span>
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
               <span>{{ activity.location }}</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-textGray">�</span>
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
               <span>{{ activity.organizer }}</span>
             </div>
             <div class="flex items-center gap-2">
-              <span class="text-textGray">👥</span>
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
               <span>{{ activity.currentParticipants }} deltagare</span>
               <span v-if="activity.maxParticipants" class="text-textGray">
                 (max {{ activity.maxParticipants }})
               </span>
             </div>
             <div v-if="activity.cost" class="flex items-center gap-2">
-              <span class="text-textGray">💰</span>
+              <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
               <span>{{ formatCurrency(activity.cost) }}</span>
             </div>
           </div>
@@ -197,7 +221,9 @@
     <!-- Empty State -->
     <div v-if="filteredActivities.length === 0" class="text-center py-12">
       <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-        <span class="text-2xl">📋</span>
+        <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
       </div>
       <h3 class="text-lg font-semibold text-navy mb-2">Inga aktiviteter hittades</h3>
       <p class="text-textGray mb-4">Det finns inga aktiviteter som matchar dina filter.</p>
@@ -258,16 +284,16 @@ const filteredActivities = computed(() => {
   }
 })
 
-const getActivityIcon = (type: string) => {
-  const icons: Record<string, string> = {
-    social: '🎉',
-    maintenance: '🔧',
-    meeting: '🤝',
-    celebration: '🎊',
-    sports: '⚽',
-    other: '📋'
+const getActivityImage = (type: string) => {
+  const images: Record<string, string> = {
+    social: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=300&fit=crop',
+    maintenance: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=400&h=300&fit=crop',
+    meeting: 'https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400&h=300&fit=crop',
+    celebration: 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=400&h=300&fit=crop',
+    sports: 'https://images.unsplash.com/photo-1461896836934-48f230077609?w=400&h=300&fit=crop',
+    other: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=400&h=300&fit=crop'
   }
-  return icons[type] || '📋'
+  return images[type] || images.other
 }
 
 const getStatusVariant = (status: string) => {

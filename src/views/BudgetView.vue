@@ -18,15 +18,15 @@
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-8">
         <div class="text-center">
           <p class="text-xs sm:text-sm text-textGray mb-2">Total budget</p>
-          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-accent">{{ formatCurrency(totalBudget) }}</p>
+          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{{ formatCurrency(totalBudget) }}</p>
         </div>
         <div class="text-center">
           <p class="text-xs sm:text-sm text-textGray mb-2">Antal poster</p>
-          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-primary">{{ budgetPosts.length }}</p>
+          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{{ budgetPosts.length }}</p>
         </div>
         <div class="text-center">
           <p class="text-xs sm:text-sm text-textGray mb-2">Kategorier</p>
-          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-secondary">{{ uniqueCategories.length }}</p>
+          <p class="text-2xl sm:text-3xl md:text-4xl font-bold text-black">{{ uniqueCategories.length }}</p>
         </div>
       </div>
     </BaseCard>
@@ -132,7 +132,7 @@
                 </span>
               </td>
               <td class="px-2 sm:px-4 py-3 text-xs sm:text-sm text-navy">{{ post.description }}</td>
-              <td class="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold" :class="post.amount >= 0 ? 'text-green-600' : 'text-accent'">
+              <td class="px-2 sm:px-4 py-3 text-right text-xs sm:text-sm font-semibold text-black">
                 {{ formatCurrency(post.amount) }}
               </td>
               <td class="px-2 sm:px-4 py-3 text-center hidden sm:table-cell">
@@ -222,7 +222,7 @@
         <div v-for="(activities, category) in activitiesByBudgetCategory" :key="category" class="border rounded-lg p-4">
           <div class="flex justify-between items-center mb-3">
             <h4 class="font-semibold text-navy">{{ getBudgetCategoryName(category) }}</h4>
-            <span class="text-sm font-semibold text-red-600">
+            <span class="text-sm font-semibold text-black">
               -{{ formatCurrency(activities.reduce((sum, a) => sum + (a.cost || 0), 0)) }}
             </span>
           </div>
@@ -237,7 +237,7 @@
                 <BaseBadge :variant="getStatusVariant(activity.status)" size="sm">
                   {{ getStatusText(activity.status) }}
                 </BaseBadge>
-                <span class="text-red-600 font-medium">
+                <span class="text-black font-medium">
                   -{{ formatCurrency(activity.cost || 0) }}
                 </span>
               </div>
@@ -309,13 +309,13 @@ const filteredBudgetPosts = computed(() => {
   })
 })
 
-// Category colors mapping - using app's blue color palette
+// Category colors mapping - using orange color palette
 const categoryColors: Record<string, string> = {
-  'Administrativa kostnader': '#1e3a8a', // Deep blue (primary dark)
-  'Aktiviteter': '#2563eb', // Bright blue (primary)
-  'Lokaler': '#3b82f6', // Medium blue
-  'Underhåll': '#60a5fa', // Light blue
-  'Driftskostnader': '#93c5fd' // Very light blue
+  'Administrativa kostnader': '#ea580d', // Orange
+  'Aktiviteter': '#d14f0b', // Darker orange
+  'Lokaler': '#f97316', // Light orange
+  'Underhåll': '#fbbf24', // Amber
+  'Driftskostnader': '#fb923c' // Orange light
 }
 
 const budgetByCategory = computed(() => {

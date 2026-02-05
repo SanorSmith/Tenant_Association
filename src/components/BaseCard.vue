@@ -1,8 +1,8 @@
 <template>
   <div :class="cardClasses">
-    <div v-if="$slots.header || title" class="card-header px-6 py-4 border-b border-gray-200">
+    <div v-if="$slots.header || title" class="card-header px-6 py-4 border-b border-border">
       <slot name="header">
-        <h3 class="text-lg font-semibold text-accent">{{ title }}</h3>
+        <h3 class="text-lg font-semibold text-text-primary">{{ title }}</h3>
       </slot>
     </div>
     
@@ -10,7 +10,7 @@
       <slot></slot>
     </div>
     
-    <div v-if="$slots.footer" class="card-footer px-6 py-4 border-t border-gray-200 bg-gray-50">
+    <div v-if="$slots.footer" class="card-footer px-6 py-4 border-t border-border bg-background-secondary">
       <slot name="footer"></slot>
     </div>
   </div>
@@ -33,8 +33,8 @@ const props = withDefaults(defineProps<Props>(), {
 })
 
 const cardClasses = computed(() => {
-  const base = 'bg-white rounded-lg border border-gray-200 max-w-full overflow-hidden'
-  const hoverClass = props.hover ? 'hover:shadow-lg hover:border-primary-300 transition-all duration-200 cursor-pointer' : ''
+  const base = 'bg-white rounded-lg border border-border max-w-full overflow-hidden'
+  const hoverClass = props.hover ? 'hover:shadow-md hover:border-primary-300 transition-all duration-200 ease-smooth cursor-pointer' : ''
   
   const shadows = {
     none: '',

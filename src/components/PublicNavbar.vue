@@ -1,27 +1,26 @@
 <template>
-  <nav class="public-navbar bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm">
+  <nav class="bg-white border-b border-border sticky top-0 z-40 shadow-sm">
     <div class="container-custom">
       <div class="flex items-center justify-between h-16">
-        <RouterLink to="/" class="flex items-center gap-2">
-          <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-            <span class="text-white font-bold text-xl">G</span>
-          </div>
-          <span class="text-xl font-bold text-accent">Grannskapet</span>
+        <RouterLink to="/" class="flex items-start gap-1 cursor-pointer group">
+          <img alt="Hyresgästföreningen" class="hidden sm:block h-8 w-auto object-contain" src="https://hyresgaestfoereningen-lokalt.vercel.app/HGF_logo_RGB_POS.png">
+          <img alt="Hyresgästföreningen" class="sm:hidden h-8 w-auto object-contain" src="https://hyresgaestfoereningen-lokalt.vercel.app/logo_mobil.png">
+          <span class="text-[10px] font-semibold text-gray-400 mt-0.5 tracking-wide">Grannskapet</span>
         </RouterLink>
 
         <div class="hidden md:flex items-center gap-8">
-          <a href="/#features" class="nav-link" @click="navigateToSection('features')">Funktioner</a>
-          <a href="/#about" class="nav-link" @click="navigateToSection('about')">Om oss</a>
-          <a href="/#contact" class="nav-link" @click="navigateToSection('contact')">Kontakt</a>
+          <RouterLink to="/" class="nav-link">Home</RouterLink>
+          <RouterLink to="/om-oss" class="nav-link">Om oss</RouterLink>
+          <RouterLink to="/kontakt" class="nav-link">Kontakt</RouterLink>
         </div>
 
         <div class="flex items-center gap-3">
-          <BaseButton variant="outline" size="md" @click="goToLogin">
+          <BaseButton variant="outline" size="md" @click="goToLogin" class="hidden md:block">
               Logga in
             </BaseButton>
           <button
             @click="toggleMobileMenu"
-            class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            class="md:hidden p-2 rounded-lg hover:bg-background-tertiary transition-colors"
             aria-label="Toggle menu"
           >
             <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -33,11 +32,11 @@
     </div>
 
     <Transition name="mobile-menu">
-      <div v-if="showMobileMenu" class="md:hidden border-t border-gray-200 bg-white">
+      <div v-if="showMobileMenu" class="md:hidden border-t border-border bg-white">
         <div class="container-custom py-4 space-y-2">
-          <a href="/#features" class="mobile-nav-link" @click="navigateToSectionMobile('features')">Funktioner</a>
-          <a href="/#about" class="mobile-nav-link" @click="navigateToSectionMobile('about')">Om oss</a>
-          <a href="/#contact" class="mobile-nav-link" @click="navigateToSectionMobile('contact')">Kontakt</a>
+          <RouterLink to="/" class="mobile-nav-link" @click="toggleMobileMenu">Home</RouterLink>
+          <RouterLink to="/om-oss" class="mobile-nav-link" @click="toggleMobileMenu">Om oss</RouterLink>
+          <RouterLink to="/kontakt" class="mobile-nav-link" @click="toggleMobileMenu">Kontakt</RouterLink>
           <BaseButton variant="outline" size="md" class="w-full" @click="goToLoginMobile">
               Logga in
             </BaseButton>
@@ -89,11 +88,11 @@ const navigateToSectionMobile = (sectionId: string) => {
 
 <style scoped>
 .nav-link {
-  @apply text-navy font-medium hover:text-primary transition-colors;
+  @apply text-navy font-medium hover:text-primary transition-colors duration-200;
 }
 
 .mobile-nav-link {
-  @apply block text-navy font-medium hover:text-primary transition-colors py-3 px-4 rounded-lg hover:bg-primary-50;
+  @apply block text-navy font-medium hover:text-primary hover:bg-background-tertiary transition-colors duration-200 py-3 px-4 rounded-lg;
 }
 
 .mobile-menu-enter-active,

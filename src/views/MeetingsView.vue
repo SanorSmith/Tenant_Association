@@ -13,9 +13,9 @@
     </div>
 
     <div class="mb-6 flex gap-4">
-      <BaseButton :variant="filter === 'all' ? 'primary' : 'outline'" size="sm" @click="filter = 'all'">Alla</BaseButton>
-      <BaseButton :variant="filter === 'upcoming' ? 'primary' : 'outline'" size="sm" @click="filter = 'upcoming'">Kommande</BaseButton>
-      <BaseButton :variant="filter === 'past' ? 'primary' : 'outline'" size="sm" @click="filter = 'past'">Tidigare</BaseButton>
+      <BaseButton :variant="filter === 'all' ? 'primary' : 'outline'" :selected="filter === 'all'" size="sm" @click="filter = 'all'">Alla</BaseButton>
+      <BaseButton :variant="filter === 'upcoming' ? 'primary' : 'outline'" :selected="filter === 'upcoming'" size="sm" @click="filter = 'upcoming'">Kommande</BaseButton>
+      <BaseButton :variant="filter === 'past' ? 'primary' : 'outline'" :selected="filter === 'past'" size="sm" @click="filter = 'past'">Tidigare</BaseButton>
     </div>
 
     <div class="grid gap-4">

@@ -8,8 +8,8 @@
     <div class="grid md:grid-cols-2 gap-6">
       <BaseCard v-for="premise in premises" :key="premise.id" hover padding="md">
         <div class="flex items-start gap-4">
-          <div class="w-16 h-16 bg-primary-100 rounded-lg flex items-center justify-center flex-shrink-0">
-            <span class="text-2xl">{{ premise.icon }}</span>
+          <div class="w-48 h-48 rounded-lg overflow-hidden flex-shrink-0">
+            <img :src="premise.image" :alt="premise.name" class="w-full h-full object-cover" />
           </div>
           <div class="flex-1">
             <h3 class="text-lg font-semibold text-navy mb-2">{{ premise.name }}</h3>
@@ -135,10 +135,10 @@ const authStore = useAuthStore()
 const bookingsStore = useBookingsStore()
 
 const premises = [
-  { id: 'premise-1', name: 'Festlokal', icon: '🎉', description: 'Stor lokal för fester och evenemang', amenities: ['Kök', 'Ljudsystem', '50 personer'] },
-  { id: 'premise-2', name: 'Tvättstuga', icon: '🧺', description: 'Moderna tvättmaskiner och torktumlare', amenities: ['4 maskiner', 'Torkskåp', 'Mangel'] },
-  { id: 'premise-3', name: 'Gym', icon: '💪', description: 'Välutrustat träningsutrymme', amenities: ['Löpband', 'Vikter', 'Yoga'] },
-  { id: 'premise-4', name: 'Gästlägenhet', icon: '🏠', description: 'Lägenhet för besökande gäster', amenities: ['2 rum', 'Kök', 'Badrum'] }
+  { id: 'premise-1', name: 'Festlokal', image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=600&fit=crop&auto=format', description: 'Stor lokal för fester och evenemang', amenities: ['Kök', 'Ljudsystem', '50 personer'] },
+  { id: 'premise-2', name: 'Tvättstuga', image: 'https://images.unsplash.com/photo-1582735689369-4fe89db7114c?w=600&h=600&fit=crop&auto=format', description: 'Moderna tvättmaskiner och torktumlare', amenities: ['4 maskiner', 'Torkskåp', 'Mangel'] },
+  { id: 'premise-3', name: 'Gym', image: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=600&fit=crop&auto=format', description: 'Välutrustat träningsutrymme', amenities: ['Löpband', 'Vikter', 'Yoga'] },
+  { id: 'premise-4', name: 'Gästlägenhet', image: 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&h=600&fit=crop&auto=format', description: 'Lägenhet för besökande gäster', amenities: ['2 rum', 'Kök', 'Badrum'] }
 ]
 
 const showBookingModal = ref(false)

@@ -1,25 +1,14 @@
 <template>
-  <nav class="navbar bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm lg:hidden">
+  <nav class="navbar bg-white border-b border-gray-200 sticky top-0 z-40 shadow-sm hidden lg:block">
     <div class="container-custom">
       <div class="flex items-center justify-between h-16">
         <div class="flex items-center gap-4">
-          <button
-            @click="toggleSidebar"
-            class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <svg class="w-6 h-6 text-navy" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-          
-          <RouterLink to="/dashboard" class="flex items-center gap-2">
+          <RouterLink to="/dashboard" class="flex items-center gap-2 hidden">
             <img alt="Hyresgästföreningen" class="hidden sm:block h-8 w-auto object-contain" src="https://hyresgaestfoereningen-lokalt.vercel.app/HGF_logo_RGB_POS.png">
             <img alt="Hyresgästföreningen" class="sm:hidden h-8 w-auto object-contain" src="https://hyresgaestfoereningen-lokalt.vercel.app/logo_mobil.png">
+            <span class="text-xl font-bold text-gray-400 hidden sm:block">Grannskapet</span>
           </RouterLink>
         </div>
-
-        <!-- Desktop navigation hidden when sidebar is present -->
 
         <div class="flex items-center gap-3">
           <button
@@ -71,22 +60,6 @@
         </div>
       </div>
     </div>
-
-    <Transition name="mobile-menu">
-      <div v-if="showMobileMenu" class="border-t border-gray-200 bg-white">
-        <div class="container-custom py-4 space-y-2">
-          <RouterLink
-            v-for="item in navItems"
-            :key="item.name"
-            :to="{ name: item.name }"
-            class="mobile-nav-link"
-            @click="showMobileMenu = false"
-          >
-            {{ item.label }}
-          </RouterLink>
-        </div>
-      </div>
-    </Transition>
   </nav>
 </template>
 
@@ -98,22 +71,7 @@ import { useAuth } from '@/composables/useAuth'
 const router = useRouter()
 const { user, logout } = useAuth()
 
-const showMobileMenu = ref(false)
 const showUserMenu = ref(false)
-
-const navItems = [
-  { label: 'Dashboard', name: 'dashboard' },
-  { label: 'Möten', name: 'meetings' },
-  { label: 'Dokument', name: 'documents' },
-  { label: 'Budget', name: 'budget' },
-  { label: 'Aktiviteter', name: 'activities' },
-  { label: 'Lokaler', name: 'premises' },
-  { label: 'Bokningar', name: 'bookings' }
-]
-
-const toggleSidebar = () => {
-  showMobileMenu.value = !showMobileMenu.value
-}
 
 const toggleUserMenu = () => {
   showUserMenu.value = !showUserMenu.value
@@ -126,22 +84,6 @@ const handleLogout = () => {
 </script>
 
 <style scoped>
-.nav-link {
-  @apply text-navy font-medium hover:text-primary transition-colors py-2 px-3 rounded-lg hover:bg-primary-50;
-}
-
-.nav-link.router-link-active {
-  @apply text-primary bg-primary-50;
-}
-
-.mobile-nav-link {
-  @apply block text-navy font-medium hover:text-primary transition-colors py-3 px-4 rounded-lg hover:bg-primary-50;
-}
-
-.mobile-nav-link.router-link-active {
-  @apply text-primary bg-primary-50;
-}
-
 .user-menu {
   @apply absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2;
 }
@@ -159,22 +101,5 @@ const handleLogout = () => {
 .dropdown-leave-to {
   opacity: 0;
   transform: translateY(-10px);
-}
-
-.mobile-menu-enter-active,
-.mobile-menu-leave-active {
-  transition: all 0.3s ease;
-}
-
-.mobile-menu-enter-from,
-.mobile-menu-leave-to {
-  opacity: 0;
-  max-height: 0;
-}
-
-.mobile-menu-enter-to,
-.mobile-menu-leave-from {
-  opacity: 1;
-  max-height: 500px;
 }
 </style>

@@ -3,15 +3,10 @@
     <div class="sidebar-content h-full flex flex-col">
       <div class="p-6 border-b border-gray-200">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span class="text-white font-bold text-xl">G</span>
-            </div>
-            <div v-if="!collapsed">
-              <h2 class="text-lg font-bold text-accent">Grannskapet</h2>
-              <p class="text-xs text-textGray">Admin Panel</p>
-            </div>
-          </div>
+          <RouterLink to="/" class="flex items-start gap-1 cursor-pointer group">
+            <img v-if="!collapsed" alt="Hyresgästföreningen" class="hidden sm:block h-8 w-auto object-contain" src="https://hyresgaestfoereningen-lokalt.vercel.app/HGF_logo_RGB_POS.png">
+            <img v-if="collapsed" alt="Hyresgästföreningen" class="h-8 w-auto object-contain" src="https://hyresgaestfoereningen-lokalt.vercel.app/logo_mobil.png">
+          </RouterLink>
           <button
             v-if="!collapsed"
             @click="toggleCollapse"
@@ -35,7 +30,7 @@
           >
             <component :is="item.icon" class="w-5 h-5 flex-shrink-0" />
             <span v-if="!collapsed" class="sidebar-label">{{ item.label }}</span>
-            <BaseBadge v-if="!collapsed && item.badge" variant="danger" size="sm" class="ml-auto">
+            <BaseBadge v-if="!collapsed && item.badge" variant="primary" size="sm" class="ml-auto">
               {{ item.badge }}
             </BaseBadge>
           </RouterLink>
@@ -158,7 +153,15 @@ const menuItems = [
 
 <style scoped>
 .sidebar {
-  @apply fixed top-0 left-0 h-screen z-30;
+  @apply fixed top-0 left-0 z-20;
+  height: calc(100vh - var(--footer-height, 200px));
+  overflow-y: auto;
+}
+
+@supports not (height: calc(100vh - var(--footer-height))) {
+  .sidebar {
+    height: calc(100vh - 200px);
+  }
 }
 
 .sidebar-link {
@@ -166,7 +169,7 @@ const menuItems = [
 }
 
 .sidebar-link.router-link-active {
-  @apply bg-primary text-white;
+  @apply bg-[#ea580d] text-white;
 }
 
 .sidebar-label {

@@ -1,8 +1,8 @@
 <template>
   <PublicLayout>
     <div class="container-custom">
-      <div class="text-center mb-16">
-        <h1 class="text-4xl font-bold text-accent mb-4">Kontakta oss</h1>
+      <div class="text-center mb-16 mt-12">
+        <h1 class="text-4xl font-bold text-black mb-8">Kontakta oss</h1>
         <p class="text-xl text-textGray max-w-2xl mx-auto">Vi är här för att hjälpa dig med dina frågor</p>
       </div>
 

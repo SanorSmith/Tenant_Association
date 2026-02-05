@@ -25,6 +25,7 @@ interface Props {
   disabled?: boolean
   loading?: boolean
   fullWidth?: boolean
+  selected?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -33,7 +34,8 @@ const props = withDefaults(defineProps<Props>(), {
   type: 'button',
   disabled: false,
   loading: false,
-  fullWidth: false
+  fullWidth: false,
+  selected: false
 })
 
 const emit = defineEmits<{
@@ -41,13 +43,13 @@ const emit = defineEmits<{
 }>()
 
 const buttonClasses = computed(() => {
-  const base = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
+  const base = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 ease-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed'
   
   const variants = {
-    primary: 'bg-primary text-white hover:bg-primary-600 focus:ring-primary-500 shadow-sm hover:shadow-md',
-    secondary: 'bg-gray-200 text-navy hover:bg-gray-300 focus:ring-gray-400 shadow-sm hover:shadow-md',
-    accent: 'bg-accent text-white hover:bg-accent-600 focus:ring-accent-500 shadow-sm hover:shadow-md',
-    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary-500'
+    primary: props.selected ? 'bg-[#ea580d] text-white border border-[#ea580d]' : 'border border-[#ea580d] text-[#ea580d] hover:bg-[#ea580d] hover:text-white active:bg-[#ea580d] active:text-white focus:ring-[#ea580d]',
+    secondary: props.selected ? 'bg-[#ea580d] text-white border border-[#ea580d]' : 'border border-[#ea580d] text-[#ea580d] hover:bg-[#ea580d] hover:text-white active:bg-[#ea580d] active:text-white focus:ring-[#ea580d]',
+    accent: props.selected ? 'bg-[#ea580d] text-white border border-[#ea580d]' : 'border border-[#ea580d] text-[#ea580d] hover:bg-[#ea580d] hover:text-white active:bg-[#ea580d] active:text-white focus:ring-[#ea580d]',
+    outline: props.selected ? 'bg-[#ea580d] text-white border border-[#ea580d]' : 'border border-[#ea580d] text-[#ea580d] hover:bg-[#ea580d] hover:text-white active:bg-[#ea580d] active:text-white focus:ring-[#ea580d]'
   }
   
   const sizes = {

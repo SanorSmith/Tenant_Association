@@ -41,48 +41,50 @@
               
               <div class="card-body">
                 <div class="info-row">
-                  <span class="icon">👤</span>
-                  <div>
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <div class="flex-1">
                     <p class="info-label">Namn</p>
                     <p class="info-value">{{ booking.name }}</p>
                   </div>
                 </div>
                 
                 <div class="info-row">
-                  <span class="icon">📧</span>
-                  <div>
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <div class="flex-1">
                     <p class="info-label">E-post</p>
                     <p class="info-value">{{ booking.email }}</p>
                   </div>
                 </div>
                 
                 <div class="info-row">
-                  <span class="icon">📞</span>
-                  <div>
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <div class="flex-1">
                     <p class="info-label">Telefon</p>
                     <p class="info-value">{{ booking.phone }}</p>
                   </div>
                 </div>
                 
                 <div class="info-row">
-                  <span class="icon">📅</span>
-                  <div>
-                    <p class="info-label">Datum</p>
-                    <p class="info-value">{{ formatDate(booking.date) }}</p>
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <div class="flex-1">
+                    <p class="info-label">Datum & Tid</p>
+                    <p class="info-value">{{ formatDate(booking.date) }}, {{ booking.startTime }} - {{ booking.endTime }}</p>
                   </div>
                 </div>
                 
                 <div class="info-row">
-                  <span class="icon">🕐</span>
-                  <div>
-                    <p class="info-label">Tid</p>
-                    <p class="info-value">{{ booking.startTime }} - {{ booking.endTime }}</p>
-                  </div>
-                </div>
-                
-                <div class="info-row">
-                  <span class="icon">📝</span>
-                  <div>
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <div class="flex-1">
                     <p class="info-label">Syfte</p>
                     <p class="info-value">{{ booking.purpose }}</p>
                   </div>
@@ -91,10 +93,10 @@
               
               <div class="card-footer">
                 <BaseButton variant="primary" size="sm" full-width @click="confirmBooking(booking.id)">
-                  ✓ Godkänn
+                  Godkänn
                 </BaseButton>
-                <BaseButton variant="secondary" size="sm" full-width @click="rejectBooking(booking.id)">
-                  ✕ Avslå
+                <BaseButton variant="outline" size="sm" full-width @click="rejectBooking(booking.id)">
+                  Avslå
                 </BaseButton>
               </div>
             </BaseCard>
@@ -121,18 +123,24 @@
               
               <div class="card-body">
                 <div class="info-row">
-                  <span class="icon">👤</span>
-                  <p class="info-value">{{ booking.name }}</p>
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  <p class="info-value flex-1">{{ booking.name }}</p>
                 </div>
                 
                 <div class="info-row">
-                  <span class="icon">📅</span>
-                  <p class="info-value">{{ formatDate(booking.date) }} {{ booking.startTime }}-{{ booking.endTime }}</p>
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  <p class="info-value flex-1">{{ formatDate(booking.date) }} {{ booking.startTime }}-{{ booking.endTime }}</p>
                 </div>
                 
                 <div class="info-row">
-                  <span class="icon">📝</span>
-                  <p class="info-value">{{ booking.purpose }}</p>
+                  <svg class="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <p class="info-value flex-1">{{ booking.purpose }}</p>
                 </div>
               </div>
               
@@ -319,33 +327,33 @@ const getStatusVariant = (status: string): 'primary' | 'success' | 'warning' | '
 /* Bookings Grid */
 .bookings-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
 }
 
 .card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.25rem;
+  padding: 0.875rem 1rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .card-header h3 {
-  font-size: 1.25rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 600;
   color: #1A1A40;
 }
 
 .card-body {
-  padding: 1.25rem;
+  padding: 1rem;
   display: grid;
-  gap: 0.75rem;
+  gap: 0.625rem;
 }
 
 .info-row {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.625rem;
   align-items: flex-start;
 }
 
@@ -355,21 +363,24 @@ const getStatusVariant = (status: string): 'primary' | 'success' | 'warning' | '
 }
 
 .info-label {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   color: #6B7280;
   margin-bottom: 0.125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
 }
 
 .info-value {
   color: #1A1A40;
   font-weight: 500;
+  font-size: 0.875rem;
 }
 
 .card-footer {
-  padding: 1.25rem;
+  padding: 0.875rem 1rem;
   border-top: 1px solid #e5e7eb;
   display: flex;
-  gap: 0.75rem;
+  gap: 0.625rem;
 }
 
 .empty-state {

@@ -64,9 +64,9 @@
           <BaseCard title="Kommande möten" padding="md" class="mt-6">
             <div class="space-y-4">
               <div v-for="meeting in upcomingMeetings" :key="meeting.id" class="flex items-start gap-3">
-                <div class="w-12 h-12 bg-primary-100 rounded-lg flex flex-col items-center justify-center flex-shrink-0">
-                  <span class="text-xs text-primary font-medium">{{ meeting.day }}</span>
-                  <span class="text-lg font-bold text-primary">{{ meeting.date }}</span>
+                <div class="w-12 h-12 bg-gray-100 rounded-lg flex flex-col items-center justify-center flex-shrink-0">
+                  <span class="text-xs text-gray-600 font-medium">{{ meeting.day }}</span>
+                  <span class="text-lg font-bold text-gray-800">{{ meeting.date }}</span>
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="text-sm font-medium text-navy truncate">{{ meeting.title }}</p>
@@ -89,25 +89,25 @@
             <div>
               <div class="flex justify-between items-center mb-2">
                 <span class="text-sm text-textGray">Intäkter</span>
-                <span class="text-lg font-semibold text-green-600">+245 000 kr</span>
+                <span class="text-lg font-semibold text-gray-600">+245 000 kr</span>
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2">
-                <div class="bg-green-500 h-2 rounded-full" style="width: 85%"></div>
+                <div class="bg-gray-400 h-2 rounded-full" style="width: 85%"></div>
               </div>
             </div>
             <div>
               <div class="flex justify-between items-center mb-2">
                 <span class="text-sm text-textGray">Utgifter</span>
-                <span class="text-lg font-semibold text-red-600">-189 000 kr</span>
+                <span class="text-lg font-semibold text-gray-600">-189 000 kr</span>
               </div>
               <div class="w-full bg-gray-200 rounded-full h-2">
-                <div class="bg-red-500 h-2 rounded-full" style="width: 65%"></div>
+                <div class="bg-gray-400 h-2 rounded-full" style="width: 65%"></div>
               </div>
             </div>
             <div class="pt-4 border-t border-gray-200">
               <div class="flex justify-between items-center">
                 <span class="text-sm font-medium text-navy">Saldo</span>
-                <span class="text-xl font-bold text-primary">+56 000 kr</span>
+                <span class="text-xl font-bold text-gray-800">+56 000 kr</span>
               </div>
             </div>
           </div>
@@ -121,13 +121,14 @@
         <BaseCard title="Senaste dokument" padding="md">
           <div class="space-y-3">
             <div v-for="doc in recentDocuments" :key="doc.id" class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
-              <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
               <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-navy truncate">{{ doc.title }}</p>
+                <p class="text-sm font-medium text-gray-600 truncate">{{ doc.title }}</p>
+                <p class="text-xs text-gray-600">{{ doc.date }}</p>
                 <p class="text-xs text-textGray">{{ doc.date }}</p>
               </div>
               <BaseBadge variant="info" size="sm">{{ doc.type }}</BaseBadge>
@@ -144,7 +145,7 @@
       <!-- Pending Bookings Section -->
       <div v-if="bookingsStore.pendingBookings.length > 0" class="mt-8">
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold text-accent">⏳ Väntande bokningar</h2>
+          <h2 class="text-2xl font-bold text-accent">Väntande bokningar</h2>
           <BaseButton variant="outline" size="sm" @click="router.push('/bookings')">
             Visa alla →
           </BaseButton>
@@ -165,19 +166,27 @@
               
               <div class="space-y-2 text-sm">
                 <p class="flex items-center gap-2 text-textGray">
-                  <span>👤</span>
+                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
                   <span>{{ booking.name }}</span>
                 </p>
                 <p class="flex items-center gap-2 text-textGray">
-                  <span>📅</span>
+                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
                   <span>{{ formatDate(booking.date) }}</span>
                 </p>
                 <p class="flex items-center gap-2 text-textGray">
-                  <span>🕐</span>
+                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   <span>{{ booking.startTime }} - {{ booking.endTime }}</span>
                 </p>
                 <p class="flex items-center gap-2 text-textGray">
-                  <span>📝</span>
+                  <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
                   <span class="truncate">{{ booking.purpose }}</span>
                 </p>
               </div>
@@ -190,15 +199,15 @@
                 full-width
                 @click="handleConfirmBooking(booking.id)"
               >
-                ✓ Godkänn
+                Godkänn
               </BaseButton>
               <BaseButton
-                variant="secondary"
+                variant="outline"
                 size="sm"
                 full-width
                 @click="handleRejectBooking(booking.id)"
               >
-                ✕ Avslå
+                Avslå
               </BaseButton>
             </div>
           </BaseCard>
@@ -247,17 +256,17 @@ const BookingIcon = () => h('svg', { fill: 'none', stroke: 'currentColor', viewB
 ])
 
 const stats = [
-  { label: 'Totalt medlemmar', value: '112', change: '+5 denna månad', changeClass: 'text-green-600', icon: UsersIcon, iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
-  { label: 'Kommande möten', value: '3', change: '2 denna vecka', changeClass: 'text-primary', icon: CalendarIcon, iconBg: 'bg-purple-100', iconColor: 'text-purple-600' },
-  { label: 'Nya dokument', value: '8', change: '+3 denna vecka', changeClass: 'text-green-600', icon: DocumentIcon, iconBg: 'bg-green-100', iconColor: 'text-green-600' },
-  { label: 'Väntande bokningar', value: bookingsStore.pendingBookings.length.toString(), change: bookingsStore.pendingBookings.length > 0 ? 'Behöver granskas' : 'Inga väntande', changeClass: bookingsStore.pendingBookings.length > 0 ? 'text-orange-600' : 'text-green-600', icon: BookingIcon, iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' }
+  { label: 'Totalt medlemmar', value: '112', change: '+5 denna månad', changeClass: 'text-gray-600', icon: UsersIcon, iconBg: 'bg-gray-100', iconColor: 'text-gray-600' },
+  { label: 'Kommande möten', value: '3', change: '2 denna vecka', changeClass: 'text-gray-600', icon: CalendarIcon, iconBg: 'bg-gray-100', iconColor: 'text-gray-600' },
+  { label: 'Nya dokument', value: '8', change: '+3 denna vecka', changeClass: 'text-gray-600', icon: DocumentIcon, iconBg: 'bg-gray-100', iconColor: 'text-gray-600' },
+  { label: 'Väntande bokningar', value: bookingsStore.pendingBookings.length.toString(), change: bookingsStore.pendingBookings.length > 0 ? 'Behöver granskas' : 'Inga väntande', changeClass: 'text-gray-600', icon: BookingIcon, iconBg: 'bg-gray-100', iconColor: 'text-gray-600' }
 ]
 
 const recentActivities = [
-  { id: 1, title: 'Nytt möte skapat', description: 'Årsstämma 2024 har schemalagts', time: 'För 2 timmar sedan', badge: 'Möte', badgeVariant: 'primary', icon: CalendarIcon, iconBg: 'bg-primary-100', iconColor: 'text-primary' },
-  { id: 2, title: 'Dokument uppladdat', description: 'Årsredovisning 2023.pdf', time: 'För 5 timmar sedan', badge: 'Dokument', badgeVariant: 'info', icon: DocumentIcon, iconBg: 'bg-blue-100', iconColor: 'text-blue-600' },
-  { id: 3, title: 'Ny aktivitet', description: 'Grillkväll i augusti', time: 'Igår', badge: 'Aktivitet', badgeVariant: 'success', icon: ActivityIcon, iconBg: 'bg-green-100', iconColor: 'text-green-600' },
-  { id: 4, title: 'Bokning bekräftad', description: 'Festlokal - 15 juni', time: 'För 2 dagar sedan', badge: 'Bokning', badgeVariant: 'warning', icon: CalendarIcon, iconBg: 'bg-yellow-100', iconColor: 'text-yellow-600' }
+  { id: 1, title: 'Nytt möte skapat', description: 'Årsstämma 2024 har schemalagts', time: 'För 2 timmar sedan', badge: 'Möte', badgeVariant: 'info', icon: CalendarIcon, iconBg: 'bg-gray-100', iconColor: 'text-gray-600' },
+  { id: 2, title: 'Dokument uppladdat', description: 'Årsredovisning 2023.pdf', time: 'För 5 timmar sedan', badge: 'Dokument', badgeVariant: 'info', icon: DocumentIcon, iconBg: 'bg-gray-100', iconColor: 'text-gray-600' },
+  { id: 3, title: 'Ny aktivitet', description: 'Grillkväll i augusti', time: 'Igår', badge: 'Aktivitet', badgeVariant: 'info', icon: ActivityIcon, iconBg: 'bg-gray-100', iconColor: 'text-gray-600' },
+  { id: 4, title: 'Bokning bekräftad', description: 'Festlokal - 15 juni', time: 'För 2 dagar sedan', badge: 'Bokning', badgeVariant: 'info', icon: CalendarIcon, iconBg: 'bg-gray-100', iconColor: 'text-gray-600' }
 ]
 
 const quickActions = [

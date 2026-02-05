@@ -1,18 +1,17 @@
 <template>
-  <footer class="footer bg-navy text-white mt-auto">
-    <div class="container-custom py-12">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div>
-          <div class="flex items-center gap-2 mb-4">
-            <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-              <span class="text-white font-bold text-xl">G</span>
-            </div>
-            <span class="text-xl font-bold">Grannskapet</span>
-          </div>
-          <p class="text-gray-300 text-sm mb-4">
-            Din plattform för effektiv föreningsförvaltning och bättre grannsamverkan.
-          </p>
-          <div class="flex gap-3">
+  <footer class="bg-navy text-white mt-auto">
+    <div class="w-full px-8 py-3">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div class="block md:col-span-1 lg:col-span-1">
+          <div class="text-center md:text-left">
+            <RouterLink to="/" class="flex items-start justify-center md:items-start gap-1 cursor-pointer group mb-2">
+              <img alt="Hyresgästföreningen" class="sm:hidden h-5 w-auto object-contain" src="https://hyresgaestfoereningen-lokalt.vercel.app/logo_mobil.png">
+              <span class="text-[8px] font-semibold text-gray-400 mt-0.5 tracking-wide">Grannskapet</span>
+            </RouterLink>
+            <p class="text-text-light text-[10px] mb-2">
+              Din plattform för effektiv föreningsförvaltning och bättre grannsamverkan.
+            </p>
+            <div class="flex gap-3 justify-center md:justify-start">
             <a href="#" class="social-link" aria-label="Facebook">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
@@ -29,45 +28,56 @@
               </svg>
             </a>
           </div>
+          </div>
         </div>
 
-        <div>
-          <h3 class="text-lg font-semibold mb-4">Snabblänkar</h3>
-          <ul class="space-y-2">
-            <li><RouterLink to="/dashboard" class="footer-link">Dashboard</RouterLink></li>
-            <li><RouterLink to="/meetings" class="footer-link">Möten</RouterLink></li>
-            <li><RouterLink to="/documents" class="footer-link">Dokument</RouterLink></li>
-            <li><RouterLink to="/activities" class="footer-link">Aktiviteter</RouterLink></li>
+        <div class="hidden md:block">
+          <h3 class="text-xs font-semibold mb-1 text-white">Tjänster</h3>
+          <ul class="space-y-0.5 text-[10px]">
+            <li><RouterLink to="/tjanster" class="footer-link">Hyresförhandlingar</RouterLink></li>
+            <li><RouterLink to="/tjanster" class="footer-link">Juridisk rådgivning</RouterLink></li>
+            <li><RouterLink to="/tjanster" class="footer-link">Medlemsförmåner</RouterLink></li>
+            <li><RouterLink to="/tjanster" class="footer-link">Utbildning</RouterLink></li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-lg font-semibold mb-4">Support</h3>
-          <ul class="space-y-2">
+        <div class="hidden md:block">
+          <h3 class="text-xs font-semibold mb-1 text-white">Om oss</h3>
+          <ul class="space-y-0.5 text-[10px]">
+            <li><RouterLink to="/om-oss" class="footer-link">Vår historia</RouterLink></li>
+            <li><RouterLink to="/om-oss" class="footer-link">Organisation</RouterLink></li>
+            <li><RouterLink to="/om-oss" class="footer-link">Kontakta oss</RouterLink></li>
+            <li><RouterLink to="/bli-medlem" class="footer-link">Bli medlem</RouterLink></li>
+          </ul>
+        </div>
+
+        <div class="hidden md:block">
+          <h3 class="text-xs font-semibold mb-1 text-white">Hitta avdelning</h3>
+          <ul class="space-y-0.5 text-[10px]">
+            <li><RouterLink to="/hitta-avdelning" class="footer-link">Sök avdelning</RouterLink></li>
+            <li><RouterLink to="/hitta-avdelning" class="footer-link">Lokala kontor</RouterLink></li>
+            <li><RouterLink to="/dashboard" class="footer-link">Medlemsportal</RouterLink></li>
             <li><RouterLink to="/hjalpcenter" class="footer-link">Hjälpcenter</RouterLink></li>
-            <li><RouterLink to="/kontakt" class="footer-link">Kontakta oss</RouterLink></li>
-            <li><RouterLink to="/faq" class="footer-link">FAQ</RouterLink></li>
-            <li><RouterLink to="/anvandarguide" class="footer-link">Användarguide</RouterLink></li>
           </ul>
         </div>
 
-        <div>
-          <h3 class="text-lg font-semibold mb-4">Kontakt</h3>
-          <ul class="space-y-3 text-sm text-gray-300">
+        <div class="hidden md:block">
+          <h3 class="text-xs font-semibold mb-1 text-white">Kontakt</h3>
+          <ul class="space-y-1 text-[10px] text-text-light">
             <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3 h-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
               <span>info@grannskapet.se</span>
             </li>
             <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3 h-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               <span>08-123 456 78</span>
             </li>
             <li class="flex items-start gap-2">
-              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg class="w-3 h-3 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
@@ -77,11 +87,11 @@
         </div>
       </div>
 
-      <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-        <p class="text-sm text-gray-400">
+      <div class="border-t border-navy-300/30 mt-2 pt-2 flex flex-col md:flex-row justify-between items-center gap-1">
+        <p class="text-[10px] text-text-light">
           © {{ currentYear }} Grannskapet. Alla rättigheter förbehållna.
         </p>
-        <div class="flex gap-6 text-sm">
+        <div class="flex gap-3 text-[10px]">
           <a href="#" class="footer-link">Integritetspolicy</a>
           <a href="#" class="footer-link">Användarvillkor</a>
           <a href="#" class="footer-link">Cookies</a>
@@ -100,10 +110,10 @@ const currentYear = computed(() => new Date().getFullYear())
 
 <style scoped>
 .footer-link {
-  @apply text-gray-300 hover:text-white transition-colors;
+  @apply text-text-light hover:text-white transition-colors duration-200;
 }
 
 .social-link {
-  @apply w-10 h-10 rounded-full bg-gray-700 hover:bg-primary flex items-center justify-center transition-colors;
+  @apply w-10 h-10 rounded-full bg-white/10 hover:bg-primary flex items-center justify-center transition-colors duration-200;
 }
 </style>

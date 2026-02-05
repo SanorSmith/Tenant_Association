@@ -93,6 +93,30 @@ const routes = [
     meta: { public: true }
   },
   {
+    path: '/tjanster',
+    name: 'services',
+    component: () => import('@/views/ServicesView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/om-oss',
+    name: 'about',
+    component: () => import('@/views/AboutView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/hitta-avdelning',
+    name: 'find-division',
+    component: () => import('@/views/FindDivisionView.vue'),
+    meta: { public: true }
+  },
+  {
+    path: '/bli-medlem',
+    name: 'become-member',
+    component: () => import('@/views/BecomeMemberView.vue'),
+    meta: { public: true }
+  },
+  {
     path: '/integritetspolicy',
     name: 'privacy-policy',
     component: () => import('@/views/PrivacyPolicyView.vue'),
